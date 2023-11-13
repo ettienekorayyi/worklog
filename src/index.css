@@ -1,0 +1,70 @@
+/******  submit mui theme ******/
+.MuiButton-fullWidth {
+    color: #fff !important;
+    background-color: #000000 !important;
+   /*  margin: 3px 2px 3px 0px !important; */
+}
+.MuiButton-fullWidth:hover {
+    background-color: #36454f !important;
+    box-shadow: none;
+}
+/******  submit mui theme ******/
+
+/*** CSS viewports  
+img#worklog_logo {
+    position: absolute;
+    top: 5rem;
+    left: 3rem;
+}***/
+
+
+div#root {
+    height: 100%;
+}
+
+button.customButtons {
+    height: 11vh;
+    width: 34vw;
+}
+
+@media only screen and (max-width: 1280px) and (max-height: 800px) {
+    /****** Generic Message Component ******/
+    img#logo-msg {
+        position: absolute;
+        left: 20rem;
+        top: -1rem;
+        height: 40rem;
+        width: 40rem;
+    }
+
+    #generic-message div#wrapper {
+        position: absolute;
+        top: 30rem;
+        left: 18rem;
+        width: 45rem;
+    }
+    
+}
+
+@media only screen and (min-width: 1281px) {
+    /****** Generic Message Component ******/
+    img#logo-msg {
+        position: absolute;
+        left: 38rem;
+        top: 0rem;
+        height: 40rem;
+        width: 40rem;
+    }
+
+    #generic-message div#wrapper {
+        margin: 0 15rem;
+        position: relative;
+        top: 12rem;
+        left: 19rem;
+        width: 50rem;
+    }
+    
+}
+
+
+

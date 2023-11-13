@@ -1,0 +1,166 @@
+.MuiTypography-colorPrimary {
+    color: #000 !important;
+}
+
+/****** Desktop Viewport 
+@media screen and (min-width: 877px) {
+    .root {
+        height: 100vh;
+    }
+    .paper {
+        padding: 8px 4px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .buttonContainer {
+        display: flex;
+        flex-direction: row-reverse;
+        padding-top: 15vh;
+    }
+
+    .form {
+        width: 100%;
+        margin-top: 10px;
+    }
+    .submit {
+        margin: 3px 2px 3px 6px;
+    }
+}******/
+
+/****** Landscape View Mode ******/
+@media only screen and (min-width: 480px) and (max-width: 916px) and (max-height: 415px) and (orientation: landscape) {
+    div#login {
+        text-align: center;
+    }
+
+    .MuiPaper-root.MuiPaper-elevation {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+
+    /* Ensures that the text fields are properly displayed*/
+    .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-6 {
+        display: contents;
+    }
+
+    /* Affects iphone viewport*/
+    .MuiFormControl-root.MuiFormControl-fullWidth.MuiTextField-root.css-wb57ya-MuiFormControl-root-MuiTextField-root {
+        width: 30rem;
+    }
+    /* Affects iphone viewport*/
+    .description div.css-md26zr-MuiInputBase-root-MuiOutlinedInput-root {
+        width: 30.1rem;
+    }
+
+    .description.css-1idn90j-MuiGrid-root {
+        /* margin-left: 3.8rem; */
+        display: flex;
+        justify-content: center;
+    }
+
+    .MuiFormControl-root.MuiFormControl-fullWidth.MuiTextField-root.css-wb57ya-MuiFormControl-root-MuiTextField-root {
+        margin-top: 8px;
+        margin-bottom: 8px;
+        margin-left: 0rem;
+    }
+    /**/
+    .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-6 {
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    #signup-grid .paper {
+        display: flex;
+        padding: 2.15rem 2rem;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    div#login {
+        margin-top: 1%;
+        margin-bottom: 5%;
+    }
+
+    div#login {
+        width: 60%;
+    }
+
+    .MuiGrid-container {
+        display: flex;
+        justify-content: center;
+    }
+    .buttonGrid .MuiButton-fullWidth {
+        height: 14vh;
+    }
+
+    .mobileButtonContainer {
+        flex-direction: unset;
+        padding-top: 0 !important;
+        /*
+        justify-content: start;
+        margin-right: 3%;
+        margin-left: 3%;
+        */
+        position: relative;
+        left: -1.5rem;
+    }
+
+    .buttonGrid {
+        padding: 1%;
+        margin: 2% !important; /* 5 */
+    }
+
+    .buttonContainer.mobileButtonContainer {
+        width: 40rem;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 5%
+    }
+
+    .clear,
+    .submit {
+        margin-left: 4%;
+    }
+}
+
+/* Targets iPhone 4 */
+@media only screen and (min-width: 480px) and (max-height: 320px) and (orientation: landscape) {
+    /* Affects iphone viewport*/
+    .MuiFormControl-root.MuiFormControl-fullWidth.MuiTextField-root.css-wb57ya-MuiFormControl-root-MuiTextField-root {
+        width: 25rem;
+    }
+    /* Affects iphone viewport*/
+    .description div.css-md26zr-MuiInputBase-root-MuiOutlinedInput-root {
+        width: 25rem;
+    }
+
+    .clear,
+    .submit {
+        margin-left: 10%;
+    }
+
+    .buttonContainer.mobileButtonContainer.css-11lq3yg-MuiGrid-root {
+        width: 30rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* Targets Samsung Galaxy Note 20 & A51/71 */
+@media only screen and (min-width: 913px) and (max-height: 413px) and (orientation: landscape) {
+    .buttonGrid .MuiButton-fullWidth {
+        width: 14rem;
+    }
+    
+    .clear.css-xsqe0f-MuiButtonBase-root-MuiButton-root {
+        margin-left: 10%;
+    }
+
+    .buttonContainer.mobileButtonContainer.css-11lq3yg-MuiGrid-root {
+        width: 40rem;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 0;
+    }
+}

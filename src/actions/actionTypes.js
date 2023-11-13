@@ -1,0 +1,57 @@
+// Jobs Action Types 
+export const CREATE_JOB_STARTED = 'CREATE_JOB_STARTED';
+export const CREATE_JOB_SUCCESS = 'CREATE_JOB_SUCCESS';
+export const CREATE_JOB_FAILED = 'CREATE_JOB_FAILED';
+
+export const GET_JOB_STARTED = 'GET_JOB_STARTED';
+export const GET_JOB = 'GET_JOB';
+export const GET_ALL_JOBS_STARTED = 'GET_ALL_JOBS_STARTED';
+export const GET_ALL_JOBS = 'GET_ALL_JOBS';
+export const GET_COMPLETED_JOBS_STARTED = 'GET_COMPLETED_JOBS_STARTED';
+export const GET_COMPLETED_JOBS = 'GET_COMPLETED_JOBS';
+
+export const UPDATE_JOB_STARTED = 'UPDATE_JOB_STARTED';
+export const UPDATE_JOB_SUCCESS = 'UPDATE_JOB_SUCCESS';
+export const UPDATE_JOB_FAILED = 'UPDATE_JOB_FAILED';
+
+// Photos Action Types 
+export const UPLOAD_PHOTO_STARTED = 'UPLOAD_PHOTO_STARTED';
+export const UPLOAD_PHOTO_SUCCESS = 'UPLOAD_PHOTO_SUCCESS';
+export const UPLOAD_PHOTO_FAILED = 'UPLOAD_PHOTO_FAILED';
+export const GET_PHOTO_STARTED = 'GET_PHOTO_STARTED';
+export const GET_PHOTO_FAILED = 'GET_PHOTO_FAILED';
+export const GET_PHOTO_SUCCESS = 'GET_PHOTO_SUCCESS';
+export const NO_PHOTO = 'NO_PHOTO';
+
+// JOB STATUS Types
+export const GET_JOB_STATUS_STARTED = 'GET_JOB_STATUS_STARTED';
+export const GET_JOB_STATUS = 'GET_JOB_STATUS';
+
+/* Search Action Types */
+export const GET_SEARCHED_JOB_STARTED = 'GET_SEARCHED_JOB_STARTED';
+export const GET_SEARCHED_JOB = 'GET_SEARCHED_JOB';
+
+/* Activity Action Types */
+export const GET_ACTIVITY_STARTED = 'GET_ACTIVITY_STARTED';
+export const GET_ACTIVITY = 'GET_ACTIVITY';
+export const GET_ACTIVITIES_STARTED = 'GET_ACTIVITIES_STARTED';
+export const GET_ACTIVITIES = 'GET_ACTIVITIES';
+export const ADD_ACTIVITY_STARTED = 'ADD_ACTIVITY_STARTED';
+export const ADD_ACTIVITY = 'ADD_ACTIVITY';
+export const UPDATE_ACTIVITY_STARTED = 'UPDATE_ACTIVITY_STARTED';
+export const UPDATE_ACTIVITY = 'UPDATE_ACTIVITY';
+
+/* Activity Action Types */
+export const GET_SEARCHED_JOBS_STARTED = 'GET_ACTIVITY_STARTED';
+
+/* Customer Action Types */
+export const GET_CUSTOMERS_STARTED = 'GET_CUSTOMERS_STARTED';
+export const GET_CUSTOMERS = "GET_CUSTOMERS"
+
+// Inventory Action Types
+export const FETCH_INVENTORY = 'FETCH_INVENTORY';
+
+// Trader Action types
+export const SIGN_IN = "SIGN_IN";
+export const SIGN_OUT = "SIGN_OUT";
+export const SET_TRADER_DATA = "SET_TRADER_DATA";

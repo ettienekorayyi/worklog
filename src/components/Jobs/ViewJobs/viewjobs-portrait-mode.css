@@ -1,0 +1,63 @@
+/****** title font /******/
+.title {
+    color: #1a1a1a;
+    font-family: Comfortaa;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 32px !important;
+    font-weight: 700;
+  }
+
+/****** Mobile Portrait Mode ******/
+@media only screen and (min-width: 280px) and (max-width: 500px) and (max-height: 916px) and (orientation: portrait) {
+    /******  Controlled Accordions ******/
+    .MuiTypography-body1 { text-align: left; }
+
+    div#panel1bh-header {
+        display: flex;
+    }
+
+    p#typographyName {
+        width: 4rem;
+    }
+
+    div#stvBox {
+        min-width: 180px;
+    }
+
+    .wrapper #content {
+        width: 100%;
+    };
+
+    div#buttonsWrapper {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+/* Media query to remove the margin top to Galaxy Fold & iPhone 4 devices */
+@media only screen and (max-width: 280px) and (max-height: 653px) and (orientation: portrait) {
+    #buttonsWrapper {
+        position: relative;
+        left: -1.5rem;
+    }
+}
+
+@media only screen and (max-width: 568px) and (max-height: 320px) and (orientation: landscape) {
+    /******  Controlled Accordions ******/
+    .MuiTypography-body1 { text-align: left; }
+
+    div#panel1bh-header {
+        display: flex;
+    }
+
+    p#typographyName {
+        width: 4rem;
+    }
+
+    .wrapper #content {
+        width: 20.5rem;
+    };
+}
+

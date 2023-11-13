@@ -1,0 +1,93 @@
+{
+ "name": "worklog",
+ "version": "0.1.0",
+ "author": {
+  "name": "Code Sydney",
+  "url": "http://www.code.sydney",
+  "github": "https://github.com/codesydney"
+ },
+ "contributors": [
+  {
+   "name": "Gift Akari",
+   "url": "https://github.com/giftakari"
+  },
+  {
+   "name": "Stephen Corral",
+   "url": "https://github.com/ettienekorayyi"
+  },
+  {
+   "name": "Kimchi Rice",
+   "url": "https://github.com/kimchirice"
+  },
+  {
+   "name": "Zoe Shi",
+   "url": "https://github.com/githubzoe"
+  },
+  {
+   "name": "Fumihito Takanami",
+   "url": "https://github.com/Fumicode01"
+  },
+  {
+   "name": "Engramar Bollas",
+   "url": "https://github.com/engramar"
+  }
+ ],
+ "private": true,
+ "dependencies": {
+  "@emotion/react": "^11.4.1",
+  "@emotion/styled": "^11.3.0",
+  "@material-ui/core": "^4.12.3",
+  "@material-ui/data-grid": "^4.0.0-alpha.37",
+  "@material-ui/icons": "^4.11.2",
+  "@mui/icons-material": "^5.0.4",
+  "@mui/material": "^5.10.12",
+  "@mui/styles": "^5.10.10",
+  "@mui/x-data-grid": "^4.0.0",
+  "@testing-library/jest-dom": "^5.12.0",
+  "@testing-library/react": "^11.2.6",
+  "@testing-library/user-event": "^12.8.3",
+  "axios": "^0.21.4",
+  "connected-react-router": "^6.9.1",
+  "history": "^4.10.1",
+  "react": "^17.0.2",
+  "react-dom": "^17.0.2",
+  "react-redux": "^7.2.4",
+  "react-router-dom": "^5.2.0",
+  "react-swipeable-views": "^0.14.0",
+  "redux": "^4.1.1",
+  "redux-thunk": "^2.3.0",
+  "reselect": "^4.0.0",
+  "web-vitals": "^1.1.2"
+ },
+ "scripts": {
+  "start": "vite",
+  "build": "vite build",
+  "serve": "vite preview"
+ },
+ "eslintConfig": {
+  "extends": [
+   "react-app",
+   "react-app/jest"
+  ]
+ },
+ "browserslist": {
+  "production": [
+   ">0.2%",
+   "not dead",
+   "not op_mini all"
+  ],
+  "development": [
+   "last 1 chrome version",
+   "last 1 firefox version",
+   "last 1 safari version"
+  ]
+ },
+ "devDependencies": {
+  "@vitejs/plugin-react": "^4.0.4",
+  "eslint": "^7.31.0",
+  "eslint-config-prettier": "^8.3.0",
+  "eslint-plugin-react": "^7.24.0",
+  "prettier": "2.3.2",
+  "vite": "^4.4.9"
+ }
+}

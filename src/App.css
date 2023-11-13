@@ -1,0 +1,38 @@
+
+
+.errormessage {
+    color: red;
+    margin: 0;
+}
+
+/*
+.App {
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+}
+
+input#fileInput {
+    visibility: hidden;
+}
+
+#upload:hover {
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+img#upload {
+    margin-top: 15px;
+    border: 2px solid;
+    padding-top: 5px;
+    border-radius: 25px;
+}
+*/
+
+@media screen and (max-width: 600px) {
+    .App {
+        text-align: center;
+        width: 100%;
+        margin: 0 auto;
+    }
+}

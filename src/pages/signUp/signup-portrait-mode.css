@@ -1,0 +1,118 @@
+.MuiTypography-colorPrimary {
+    color: #000 !important;
+}
+
+/****** Desktop Viewport 
+@media screen and (min-width: 877px) {
+    .root {
+        height: 100vh;
+    }
+    .paper {
+        padding: 8px 4px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .buttonContainer {
+        display: flex;
+        flex-direction: row-reverse;
+        padding-top: 15vh;
+    }
+
+    .form {
+        width: 100%;
+        margin-top: 10px;
+    }
+    .submit {
+        margin: 3px 2px 3px 6px;
+    }
+}
+******/
+
+/******
+This media query covers all the portrait
+viewports of mobile devices.
+******/
+@media only screen and (min-width: 280px) and (max-width: 500px) and (max-height: 916px) and (orientation: portrait) {
+    .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-6 {
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    #signup-grid .paper {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        /* Bottom Padding leaves the huge gap on the bottom of the sign up page */
+        padding: 2.15rem 2rem 10rem 2rem;
+    }
+
+    .paper {
+        height: 100%;
+    }
+
+    div#login {
+        margin-top: 1%;
+        margin-bottom: 5%;
+    }
+
+    .MuiGrid-container {
+        display: flex;
+        justify-content: center;
+    }
+    .buttonGrid .MuiButton-fullWidth {
+        width: 34vw;
+        height: 10vh;
+    }
+
+    .mobileButtonContainer {
+        flex-direction: unset;
+        padding-top: 0;
+        justify-content: start;
+    }
+
+    .MuiGrid-root.MuiGrid-item.buttonGrid {
+        padding: 1%;
+        margin: 5%;
+    }
+}
+
+
+/* Media query to remove the button margin to Galaxy Fold & iPhone 4 devices */
+@media only screen and (min-width: 280px) and (max-width: 500px) and (max-height: 654px) and (orientation: portrait) {
+    .MuiGrid-root.MuiGrid-item.buttonGrid {
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        left: -0.7rem;
+    }
+
+    #signup-grid .paper {
+        padding-bottom: 1rem;
+    }
+}
+
+@media only screen and (min-width: 410px) and (max-width: 412px) and (max-height: 916px) and (orientation: portrait) {
+    #signup-grid .paper {
+        padding-bottom: 13.70rem;
+    }
+
+    .buttonGrid .MuiButton-fullWidth {
+        height: 8vh;
+    }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 414px) and (max-height: 896px) and (orientation: portrait) {
+    #signup-grid .paper {
+        padding-bottom: 7.10rem;
+    }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 414px) and (max-height: 740px) and (orientation: portrait) {
+    #signup-grid .paper {
+        padding-bottom: 3.30rem;
+    }
+}
+
+
+
