@@ -163,7 +163,7 @@
   }
 }
 
-/* Media query to remove the margin top to Galaxy Fold & iPhone 4 devices */
+/* Media query to target Galaxy Fold & iPhone 4 devices */
 @media only screen and (min-width: 651px) and (max-width: 654px) and (max-height: 280px) and (orientation: landscape) {
   main.MuiContainer-root#subLoginContainer {
     width: 85%;
