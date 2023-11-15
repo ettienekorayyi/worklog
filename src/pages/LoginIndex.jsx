@@ -65,7 +65,7 @@ export default function LoginIndex ({ history }) {
             >
                 <div className={`paper`}>
                     <div className={`form`}>
-                        <Container component='main' maxWidth='xs'>
+                        <Container component='main' maxWidth='xs' id='mainLoginContainer'>
                             <Grid
                                 container
                                 spacing={3}
