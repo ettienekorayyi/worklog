@@ -2,13 +2,17 @@
 .MuiButton-fullWidth {
     color: #fff !important;
     background-color: #000000 !important;
-   /*  margin: 3px 2px 3px 0px !important; */
 }
+
 .MuiButton-fullWidth:hover {
     background-color: #36454f !important;
     box-shadow: none;
 }
+
 /******  submit mui theme ******/
+.MuiTypography-colorPrimary {
+    color: #000 !important;
+}
 
 div#root { height: 100%; }
 
