@@ -3,7 +3,7 @@
 }
 
 /****** Landscape View Mode ******/
-@media only screen and (min-width: 480px) and (max-width: 916px) and (max-height: 415px) and (orientation: landscape) {
+@media only screen and (min-width: 480px) and (max-width: 932px) and (max-height: 431px) and (orientation: landscape) {
     div#login {
         text-align: center;
     }
@@ -22,13 +22,13 @@
     .MuiFormControl-root.MuiFormControl-fullWidth.MuiTextField-root {
         width: 30rem;
     }
+    
     /* Affects iphone viewport*/
     .description div {
         width: 30.1rem;
     }
 
     .description {
-        /* margin-left: 3.8rem; */
         display: flex;
         justify-content: center;
     }
@@ -41,7 +41,7 @@
         margin-bottom: 10px;
         margin-left: 0rem;
     }
-    /**/
+
     .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-6 {
         padding-top: 8px;
         padding-bottom: 8px;
@@ -67,6 +67,7 @@
         display: flex;
         justify-content: center;
     }
+
     .buttonGrid .MuiButton-fullWidth {
         height: 14vh;
     }
@@ -99,11 +100,11 @@
 /* Targets iPhone 4 */
 @media only screen and (min-width: 480px) and (max-height: 320px) and (orientation: landscape) {
     /* Affects iphone viewport*/
-    .MuiFormControl-root.MuiFormControl-fullWidth.MuiTextField-root.css-wb57ya-MuiFormControl-root-MuiTextField-root {
+    .MuiFormControl-root.MuiFormControl-fullWidth.MuiTextField-root {
         width: 25rem;
     }
     /* Affects iphone viewport*/
-    .description div.css-md26zr-MuiInputBase-root-MuiOutlinedInput-root {
+    .description div {
         width: 25rem;
     }
 
