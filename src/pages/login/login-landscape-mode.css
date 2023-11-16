@@ -130,12 +130,13 @@
         main.MuiContainer-root.css-nzinn5-MuiContainer-root
         height: 100%;
         current:
-        height: 10vh;
+        height: 100vh;
+        margin-top: 1%;
     */
   main.MuiContainer-root#subLoginContainer {
     width: 85%;
-    height: 100vh;
-    margin-top: 1%;
+    height: 20.8rem;
+    
   }
 
   main.MuiContainer-root#mainLoginContainer {

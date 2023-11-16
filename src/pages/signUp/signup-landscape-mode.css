@@ -137,3 +137,31 @@
         padding-left: 0;
     }
 }
+
+/* Targets iPhone X Text fields */
+@media only screen and (min-width: 812px) and (max-height: 413px) and (orientation: landscape) {
+    .MuiFormControl-root.MuiFormControl-fullWidth.MuiTextField-root {
+        width: 38rem;
+    }
+}
+
+/* Targets iPhone XR Text fields */
+@media only screen and (min-width: 896px) and (max-height: 416px) and (orientation: landscape) {
+    .MuiFormControl-root.MuiFormControl-fullWidth.MuiTextField-root {
+        width: 41rem;
+    }
+}
+
+/* Targets A51/Note 20/S20 Ultra */
+@media only screen and (min-width: 913px) and (max-height: 415px) and (orientation: landscape) {
+    .MuiFormControl-root.MuiFormControl-fullWidth.MuiTextField-root {
+        width: 43rem;
+    }
+}
+
+/* Targets A51/Note 20/S20 Ultra */
+@media only screen and (min-width: 667px) and (max-width: 740px) and (max-height: 415px) and (orientation: landscape) {
+    .MuiFormControl-root.MuiFormControl-fullWidth.MuiTextField-root {
+        width: 31rem;
+    }
+}
