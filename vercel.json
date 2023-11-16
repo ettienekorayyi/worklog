@@ -1,3 +1,8 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    {
+      "source": "(.*)",
+      "destination": "https://engramar.pythonanywhere.com/api/v1/:path*"
+    }
+  ]
 }
