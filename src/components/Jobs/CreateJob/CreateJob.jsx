@@ -12,7 +12,7 @@ import Lookup from '../../../common/Lookup';
 import { useDispatch, useSelector } from "react-redux";
 import SimpleBackdrop from "../../Loading/SimpleBackdrop";
 import { getStatus } from "../../../actions/action";
-import { getCustomers } from "../../../actions/customerActions";
+//import { getCustomers } from "../../../actions/customerActions";
 import { createJob } from '../../../actions/action';
 import { useState } from "react";
 
@@ -45,9 +45,9 @@ const CreateJob = () => {
 
     const [customerName, setCustomerName] = useState('');
     const [customerId, setCustomerId] = useState(0);
-    const [jobStatus, setJobStatus] = useState('Not yet started');
-    const [jobStatusId, setJobStatusId] = useState(1);
-    const status = useSelector((state) => state.status.job);
+    const [jobStatus, setJobStatus] = useState('Not yet started');//
+    const [jobStatusId, setJobStatusId] = useState(1);//
+    const status = useSelector((state) => state);//state.status.job console.log(state)
     const { customers, job } = useSelector((state) => state);
     const indicator = useSelector((state) => state.job.loading);
     const matches = useMediaQuery('(max-width:600px)');
@@ -56,7 +56,7 @@ const CreateJob = () => {
 
     useEffect(() => {
         dispatch(getStatus());
-        dispatch(getCustomers())
+       //dispatch(getCustomers())
     }, [indicator]);
 
     let jobObject = {
@@ -232,6 +232,7 @@ const CreateJob = () => {
         setJobStatusId(1);
     }
 
+    console.log(status)
     return (
         <Box
             sx={{
@@ -328,6 +329,7 @@ const CreateJob = () => {
                             ))}
                         </TextField>
                     </div>
+                    {/* 
                     <div>
                         <Lookup
                             data={customers.payload}
@@ -336,6 +338,7 @@ const CreateJob = () => {
                             errors={errors}
                         />
                     </div>
+                    */}
                     <div>
                         <TextField
                             id="outlined-multiline-static"

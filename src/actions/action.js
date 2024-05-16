@@ -1,5 +1,6 @@
 import * as actions from './actionTypes';
 import taskstechApi from '../api/taskstechApi';
+import {Buffer} from 'buffer';
 import { fetchInventoryAction } from './inventoryActions'
 import { signInAction, signOutAction, setTraderData } from './traderActions';
 import { push } from 'connected-react-router';
@@ -10,13 +11,11 @@ export const getJob = (id) => async dispatch => {
 
     try {
         dispatch({ type: actions.GET_JOB_STARTED, loading: true });
-        
+
         await taskstechApi
-            .get(`/job/${id}`, config)
+            .get(`/job/id?id=${id}`, config)
             .then((res) => {
                 dispatch({ type: actions.GET_JOB, payload: res.data, loading: false });
-            }).catch(e => {
-                console.log(e)
             });
     } catch (error) {
         console.log(error.message)
@@ -52,21 +51,21 @@ export const createJob = (job) => async dispatch => {
     const config = { headers: { Authorization: `Bearer ${token}` } };
 
     try {
-        dispatch({ 
-            type: actions.CREATE_JOB_STARTED, 
-            loading: true, 
-            showModal: false 
-        });        
-        
+        dispatch({
+            type: actions.CREATE_JOB_STARTED,
+            loading: true,
+            showModal: false
+        });
+
         await taskstechApi
             .post('/job', job, config)
             .then((res) => {
                 console.log(res)
-                dispatch({ 
-                    type: actions.CREATE_JOB_SUCCESS, 
-                    loading: false, 
-                    showModal: true 
-                });        
+                dispatch({
+                    type: actions.CREATE_JOB_SUCCESS,
+                    loading: false,
+                    showModal: true
+                });
             }).catch(e => {
                 console.log(e)
             });
@@ -81,15 +80,15 @@ export const updateJob = (job) => async dispatch => {
 
     try {
         dispatch({ type: actions.UPDATE_JOB_STARTED, loading: true, showModal: false });
-        
+
         await taskstechApi
             .put(`/job/${job.id}`, job, config)
             .then((res) => {
                 console.log(res)
-                dispatch({ type: actions.UPDATE_JOB_SUCCESS, payload: job, loading: false, showModal: true });
             }).catch(e => {
                 console.log(e)
             });
+            dispatch({ type: actions.UPDATE_JOB_SUCCESS, payload: job, loading: false, showModal: true });
     } catch (error) {
         console.log(error.message)
     }
@@ -100,19 +99,20 @@ export const updateJob = (job) => async dispatch => {
 
 
 export const getStatus = () => async dispatch => {
-    const { data } = await taskstechApi.get('/lists');
+    const { data } = await taskstechApi.get('/jobstatus');
 
     dispatch({ type: actions.GET_JOB_STATUS_STARTED, loading: true });
-
+    //console.log("data")
+    //console.log(typeof data)
+    //console.log(data)
     if (data) {
-        dispatch({ type: actions.GET_JOB_STATUS, payload: data.job_status, loading: false });
+        dispatch({ type: actions.GET_JOB_STATUS, payload: data, loading: false });
     }
 }
 
 // Authentication Action
 export const listenAuthState = (matches) => {
     const renderedInMobile = matches ? '/mobile-login-menu' : '/login';
-    
     return async (dispatch) => {
         const token = localStorage.getItem('token')
         if (!token) {
@@ -246,18 +246,26 @@ export const signUp = (firstname, lastname, email, password, confirmPassword, de
 }
 
 export const signIn = (email, password) => {
+    const authString = `${email}:${password}`;
+    const encodedAuth = Buffer.from(authString).toString('base64');
+    
+    const postData = {
+        email: email,
+        password: password,
+    };
+
+    const headers = {
+        'Authorization': `Basic ${encodedAuth}`,
+        'Content-Type': 'application/json',
+      };
+
     return async (dispatch) => {
-        taskstechApi.post(`/tokens`, {},
-            {
-                auth: {
-                    username: email,
-                    password: password,
-                }
-            }
-        )
+        taskstechApi.post(`user/signIn`, postData, headers)
             .then(res => {
-                localStorage.setItem("token", res.data.token)
-                localStorage.setItem("id", res.data.user_id)
+                localStorage.setItem("id", res.data.id) 
+                localStorage.setItem("token", res.data.token) 
+                
+                console.log(res.data)
                 dispatch(signInAction({
                     isSignedIn: true,
                     id: res.data.user_id,

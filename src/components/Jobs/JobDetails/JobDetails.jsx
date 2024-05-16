@@ -12,7 +12,7 @@ import Lookup from '../../../common/Lookup';
 import AlertModal from '../../../common/AlertModal';
 import SimpleBackdrop from "../../Loading/SimpleBackdrop";
 import { getStatus } from "../../../actions/action";
-import { getCustomers } from "../../../actions/customerActions";
+//import { getCustomers } from "../../../actions/customerActions";
 import { updateJob, getJob } from '../../../actions/action';
 import './jobdetails.css';
 
@@ -30,8 +30,8 @@ const useStyles = makeStyles(() => ({
 const JobDetails = (props) => { 
     const { rows } = props;
     const classes = useStyles();
-    const jobs = rows === undefined ? {} : rows.rows; 
-    const { customers, job } = useSelector((state) => state);
+    const jobs = rows === undefined ? {} : rows; // state
+    const { job } = useSelector((state) => state); // customers, 
     const custId = job.payload === undefined ? {} : job.payload.customer?.user_id;
 
     const [jobId, setJobId] = useState({});
@@ -47,40 +47,43 @@ const JobDetails = (props) => {
         customer_id: { helperText: '', fieldError: false },
     });
 
-    const jstatus = jobs.payload === undefined ? {} : job.payload.job_status;
+    const jstatus = jobs.row === undefined ? {} : jobs.row.status;
 
-    const [customerName, setCustomerName] = useState('');
-    const [customerId, setCustomerId] = useState(custId);
+    //const [customerName, setCustomerName] = useState('');
+    //const [customerId, setCustomerId] = useState(custId);
     const [jobStatus, setJobStatus] = useState(jstatus?.name); // put inside useeffect
     const [jobStatusId, setJobStatusId] = useState(jstatus.id);// put inside useeffect
-    const status = useSelector((state) => state.status.job);
+    const status = useSelector((state) => state.status.job); // state.status.job might need to remove
     
     const indicator = useSelector((state) => state.job.loading);
     const matches = useMediaQuery('(max-width:600px)');
 
     const dispatch = useDispatch();
-    //console.log(job.payload.customer)
+
     useEffect(() => {
         dispatch(getStatus());
-        dispatch(getCustomers());
-        if(jobs?.row?.id !== undefined) dispatch(getJob(jobs?.row?.id));
-        if(job.payload !== undefined) {
-            setJobId(job.payload.id);
-            setJobName(job.payload.name);
+        //dispatch(getCustomers());
+        //debugger;
+        if(jobs?.row?.jobId !== undefined) dispatch(getJob(jobs?.row?.jobId));
+        /**/
+        if(job.payload.id !== undefined) {
+            setJobId(job.payload.id); 
+            setJobName(job.payload.name); 
             setJobAddress(job.payload.address);
-            setCustomerName(`${job.payload.customer?.first_name} ${job.payload.customer?.last_name}`);
+            //setCustomerName(`${job.payload.customer?.first_name} ${job.payload.customer?.last_name}`);
             setDescription(job.payload.description);
             setNotes(job.payload.notes);
         }
-    }, [indicator,job.payload]);
+        
+    }, [indicator,job.payload]); 
 
     let jobObject = {
         id: jobId,
         name: jobName,
         address: jobAddress,
         description: description,
-        job_status_id: jobStatusId,
-        customer_id: customerId,
+        status: jobStatusId,
+        //customer_id: customerId,
         notes: notes
     }
 
@@ -177,8 +180,8 @@ const JobDetails = (props) => {
         let { helperText, fieldError } = fieldValidator(value, name);//
 
         switch (name) {
-            case 'job_status_id':
-                {
+            case 'status': // job_status_id
+                { 
                     const index = selectedIndex;
                     const el = childNodes[index]
                     const option = el.getAttribute('id');
@@ -191,10 +194,10 @@ const JobDetails = (props) => {
                 {
                     const { user_id } = params.props;
 
-                    if (user_id !== 0) setCustomerId(user_id);
+                    //if (user_id !== 0) setCustomerId(user_id);
 
                     if (fieldError === false) {
-                        setCustomerName(value);
+                        //setCustomerName(value);
                         setErrors({ [name]: { helperText, fieldError } });
                     }
                     if (fieldError === true) {
@@ -304,12 +307,14 @@ const JobDetails = (props) => {
                         ))}
                     </TextField>
 
+                    {/*
                     <Lookup
                         data={customers.payload}
                         customerName={customerName}
                         handleDropdownChange={handleDropdownChange}
                         errors={errors}
                     />
+                    */}
 
                     <TextField
                         error={errors.description === undefined ? '' : errors.description.fieldError}
