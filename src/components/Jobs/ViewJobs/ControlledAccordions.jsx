@@ -58,18 +58,17 @@ export default function ControlledAccordions (props) {
     const handleJobDetailsClick = (event, row) => {
         const params = {
             componentType: "jobDetails",
-            detailsPath: `/view/jobs/details/${row.id}`,
-            rows: { row },
+            detailsPath: `/view/jobs/details/${row.jobId}`,
+            rows: { row }
         };
-
         parentCallback(params);
     };
-
+   
     const listRows = () =>
         rows.map(row => {
             return (
                 <StyledAccordion
-                    key={row.id}
+                    key={row.jobId}
                     expanded={expanded === "panel1"}
                     onChange={handleChange("panel1")}
                     className='root'
@@ -153,7 +152,7 @@ export default function ControlledAccordions (props) {
                                             color='text.secondary'
                                             gutterBottom
                                         >
-                                            {row.job_status["name"]}
+                                            {row.status}
                                         </Typography>
                                     </div>
                                 </div>

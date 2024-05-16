@@ -27,15 +27,17 @@ export const FullWidthTabs = ({ history, callback }) => {
 
   const handleChange = (event, newValue) => setValue(newValue);
   
+  /* job.job_status.name */
   const completedJobs = {
     payload: jobs.payload.filter(job => {
-      return job.job_status.name === 'Completed';
+      return job.status === 'Completed';
     })
   };
+  
 
   const activeJobs = {
     payload: jobs.payload.filter(job => {
-      return job.job_status.name === 'In progress';
+      return job.status === 'In progress';
     })
   };
 

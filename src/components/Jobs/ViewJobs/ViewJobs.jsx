@@ -11,21 +11,24 @@ export default function ViewJobs(props) {
 
     const callback = (props) => {
         setType(props.componentType);
-        setParams(props)
+        setParams(props.rows)
         setPath(props.detailsPath);
     };
 
     const renderDataTable = () => {
         switch (type) {
             case 'diary':
-                return <JobDiary rows={params} onClick={history.push({
+                return <JobDiary 
+                    rows={params} onClick={history.push({
                     pathname: "/view/jobs/diary",
                     state: { rows: params }
                 })} />
             case 'jobDetails':
-                return <JobDetails rows={params} path={path} onClick={history.push({
-                    pathname: path,
-                })} />
+                return <JobDetails 
+                    rows={params} 
+                    path={path} 
+                    onClick={history.push({pathname: path,})} 
+                />
             default:
                 return <FullWidthTabs history={history} callback={callback} />
         }
