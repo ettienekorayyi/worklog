@@ -77,18 +77,18 @@ export const createJob = (job) => async dispatch => {
 export const updateJob = (job) => async dispatch => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: `Bearer ${token}` } };
-
+    debugger
     try {
         dispatch({ type: actions.UPDATE_JOB_STARTED, loading: true, showModal: false });
 
-        await taskstechApi
+        let job = await taskstechApi
             .put(`/job/${job.id}`, job, config)
-            .then((res) => {
+            /*.then((res) => {
                 console.log(res)
             }).catch(e => {
                 console.log(e)
-            });
-            dispatch({ type: actions.UPDATE_JOB_SUCCESS, payload: job, loading: false, showModal: true });
+            });*/
+            dispatch({ type: actions.UPDATE_JOB_SUCCESS, payload: job.data, loading: false, showModal: true });
     } catch (error) {
         console.log(error.message)
     }
@@ -102,10 +102,11 @@ export const getStatus = () => async dispatch => {
     const { data } = await taskstechApi.get('/jobstatus');
 
     dispatch({ type: actions.GET_JOB_STATUS_STARTED, loading: true });
-    //console.log("data")
+    //debugger;
     //console.log(typeof data)
-    //console.log(data)
+    console.log(data)
     if (data) {
+        console.log("data")
         dispatch({ type: actions.GET_JOB_STATUS, payload: data, loading: false });
     }
 }
