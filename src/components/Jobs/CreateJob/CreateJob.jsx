@@ -43,7 +43,7 @@ const CreateJob = () => {
   const [customerName, setCustomerName] = useState('')
   const [customerId, setCustomerId] = useState(0)
   const [jobStatus, setJobStatus] = useState('Not yet started') //
-  const [jobStatusId, setJobStatusId] = useState(1) //
+  const [jobStatusId, setJobStatusId] = useState("c4a17ab4-316c-4dde-a606-29f7e37637e8") //
   const { customers, job, status } = useSelector(state => state) // console.log(state)
   const indicator = useSelector(state => state.job.loading)
   const matches = useMediaQuery('(max-width:600px)')
@@ -52,9 +52,7 @@ const CreateJob = () => {
 
   useEffect(() => {
     //debugger
-    // add an if statement to check if status.payload len is 0
     dispatch(getStatus())
-    //if(status?.payload !== undefined) dispatch(getStatus())
     //dispatch(getCustomers())
   }, [indicator])
 
@@ -62,8 +60,8 @@ const CreateJob = () => {
     name: jobName,
     address: jobAddress,
     description: description,
-    job_status_id: jobStatusId,
-    customer_id: customerId,
+    jobStatusId: jobStatusId,
+    //customer_id: customerId,
     notes: notes
   }
 
@@ -157,7 +155,8 @@ const CreateJob = () => {
   const handleDropdownChange = (event, params) => {
     const { name, selectedIndex, childNodes, value } = event.target
     let { helperText, fieldError } = fieldValidator(value, name) //
-
+    debugger;
+    console.log(name)
     switch (name) {
       case 'job_status_id': {
         const index = selectedIndex
@@ -165,7 +164,7 @@ const CreateJob = () => {
         const option = el.getAttribute('id')
 
         setJobStatus(value)
-        setJobStatusId(Number(option))
+        setJobStatusId((option))
         break
       }
       case 'customer_id': {
@@ -194,7 +193,7 @@ const CreateJob = () => {
   }
 
   const isNotValid = () => {
-    if (jobNameIsValid && descriptionIsValid && customerNameIsValid) {
+    if (jobNameIsValid && descriptionIsValid) { // && customerNameIsValid
       return false
     } else {
       return true
@@ -203,16 +202,17 @@ const CreateJob = () => {
 
   const handleSubmit = event => {
     event.preventDefault()
+    //debugger;
     dispatch(createJob(jobObject))
     resetFields()
   }
 
   const resetFields = () => {
     jobObject = {
-      customer_id: '',
+      //customer_id: '',
       description: '',
       jobName: '',
-      job_status_id: 1,
+      //job_status_id: 1,
       tradesperson_id: ''
     }
     setJobName('')
@@ -293,14 +293,14 @@ const CreateJob = () => {
           </div>
           <div>
             <TextField
-              error={
+              error={ 
                 errors.description === undefined
-                  ? ''
+                  ? false // ''
                   : errors.description.fieldError
               }
               helperText={
                 errors.description === undefined
-                  ? ''
+                  ? false // ''
                   : errors.description.helperText
               }
               value={description}

@@ -13,6 +13,7 @@ function jobStatusReducer(state = initialState, action) {
             }
         case actions.GET_JOB_STATUS:
             return {
+                ...state,
                 payload: action.payload,
                 loading: action.loading
             }

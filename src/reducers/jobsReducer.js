@@ -11,7 +11,6 @@ function jobsReducer(state = initialState, action) {
         case actions.CREATE_JOB_STARTED:
             return {
                 ...state,
-                payload: action.payload,
                 loading: true,
                 showModal: false
             };
