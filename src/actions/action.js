@@ -1,6 +1,6 @@
 import * as actions from './actionTypes';
 import taskstechApi from '../api/taskstechApi';
-import {Buffer} from 'buffer';
+import { Buffer } from 'buffer';
 import { fetchInventoryAction } from './inventoryActions'
 import { signInAction, signOutAction, setTraderData } from './traderActions';
 import { push } from 'connected-react-router';
@@ -12,11 +12,12 @@ export const getJob = (id) => async dispatch => {
     try {
         dispatch({ type: actions.GET_JOB_STARTED, loading: true });
 
-        await taskstechApi
-            .get(`/job/id?id=${id}`, config)
-            .then((res) => {
-                dispatch({ type: actions.GET_JOB, payload: res.data, loading: false });
-            });
+        let job = await taskstechApi.get(`/job/id?id=${id}`, config);
+
+        if (job.data) {
+            console.log(job.data)
+            dispatch({ type: actions.GET_JOB, payload: job.data, loading: false });
+        }
     } catch (error) {
         console.log(error.message)
     }
@@ -60,14 +61,11 @@ export const createJob = (job) => async dispatch => {
         await taskstechApi
             .post('/job', job, config)
             .then((res) => {
-                console.log(res)
                 dispatch({
                     type: actions.CREATE_JOB_SUCCESS,
                     loading: false,
                     showModal: true
                 });
-            }).catch(e => {
-                console.log(e)
             });
     } catch (error) {
         console.log(error.message)
@@ -76,19 +74,22 @@ export const createJob = (job) => async dispatch => {
 
 export const updateJob = (job) => async dispatch => {
     const token = localStorage.getItem('token');
-    const config = { headers: { Authorization: `Bearer ${token}` } };
+    const config = {
+        method: 'PUT',
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+        }
+    };
 
     try {
         dispatch({ type: actions.UPDATE_JOB_STARTED, loading: true, showModal: false });
-
-        await taskstechApi
-            .put(`/job/${job.id}`, job, config)
-            .then((res) => {
-                console.log(res)
-            }).catch(e => {
-                console.log(e)
-            });
-            dispatch({ type: actions.UPDATE_JOB_SUCCESS, payload: job, loading: false, showModal: true });
+        await taskstechApi.put(`/job/id?id=${job.jobId}`, job, config).then((jobToBeUpdated) => {
+            dispatch({ type: actions.UPDATE_JOB_SUCCESS, payload: jobToBeUpdated.data, loading: false, showModal: true });
+        }).catch((e) => {
+            console.log(e.message)
+        });
+        
     } catch (error) {
         console.log(error.message)
     }
@@ -102,12 +103,8 @@ export const getStatus = () => async dispatch => {
     const { data } = await taskstechApi.get('/jobstatus');
 
     dispatch({ type: actions.GET_JOB_STATUS_STARTED, loading: true });
-    //console.log("data")
-    //console.log(typeof data)
-    //console.log(data)
-    if (data) {
-        dispatch({ type: actions.GET_JOB_STATUS, payload: data, loading: false });
-    }
+
+    if (data) dispatch({ type: actions.GET_JOB_STATUS, payload: data, loading: false });
 }
 
 // Authentication Action
@@ -248,7 +245,7 @@ export const signUp = (firstname, lastname, email, password, confirmPassword, de
 export const signIn = (email, password) => {
     const authString = `${email}:${password}`;
     const encodedAuth = Buffer.from(authString).toString('base64');
-    
+
     const postData = {
         email: email,
         password: password,
@@ -257,15 +254,14 @@ export const signIn = (email, password) => {
     const headers = {
         'Authorization': `Basic ${encodedAuth}`,
         'Content-Type': 'application/json',
-      };
+    };
 
     return async (dispatch) => {
         taskstechApi.post(`user/signIn`, postData, headers)
             .then(res => {
-                localStorage.setItem("id", res.data.id) 
-                localStorage.setItem("token", res.data.token) 
-                
-                console.log(res.data)
+                localStorage.setItem("id", res.data.id)
+                localStorage.setItem("token", res.data.token)
+
                 dispatch(signInAction({
                     isSignedIn: true,
                     id: res.data.user_id,
@@ -273,7 +269,6 @@ export const signIn = (email, password) => {
                 getTraderData()
                 dispatch(push('/view/jobs'))
             }).catch((error) => {
-                console.log(error.response)
                 alert("Email and Password does not match. \n\nPlease try again.")
             })
     }

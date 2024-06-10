@@ -12,7 +12,6 @@ import Lookup from '../../../common/Lookup';
 import AlertModal from '../../../common/AlertModal';
 import SimpleBackdrop from "../../Loading/SimpleBackdrop";
 import { getStatus } from "../../../actions/action";
-//import { getCustomers } from "../../../actions/customerActions";
 import { updateJob, getJob } from '../../../actions/action';
 import './jobdetails.css';
 
@@ -30,10 +29,9 @@ const useStyles = makeStyles(() => ({
 const JobDetails = (props) => { 
     const { rows } = props;
     const classes = useStyles();
-    const jobs = rows === undefined ? {} : rows; // state
-    const { job } = useSelector((state) => state); // customers, 
-    const custId = job.payload === undefined ? {} : job.payload.customer?.user_id;
-
+    const jobs = rows === undefined ? {} : rows; 
+    const { job, status } = useSelector((state) => state); 
+    
     const [jobId, setJobId] = useState({});
     const [jobName, setJobName] = useState({});
     const [jobAddress, setJobAddress] = useState({});
@@ -47,46 +45,42 @@ const JobDetails = (props) => {
         customer_id: { helperText: '', fieldError: false },
     });
 
-    const jstatus = jobs.row === undefined ? {} : jobs.row.status;
-
-    //const [customerName, setCustomerName] = useState('');
-    //const [customerId, setCustomerId] = useState(custId);
-    const [jobStatus, setJobStatus] = useState(jstatus?.name); // put inside useeffect
-    const [jobStatusId, setJobStatusId] = useState(jstatus.id);// put inside useeffect
-    const status = useSelector((state) => state.status.job); // state.status.job might need to remove
+    const [jobStatus, setJobStatus] = useState(job.payload.status); 
+    const [jobStatusId, setJobStatusId] = useState("c4a17ab4-316c-4dde-a606-29f7e37637e8");
     
     const indicator = useSelector((state) => state.job.loading);
     const matches = useMediaQuery('(max-width:600px)');
 
     const dispatch = useDispatch();
-
+    
     useEffect(() => {
         dispatch(getStatus());
-        //dispatch(getCustomers());
-        //debugger;
+
         if(jobs?.row?.jobId !== undefined) dispatch(getJob(jobs?.row?.jobId));
-        /**/
-        if(job.payload.id !== undefined) {
-            setJobId(job.payload.id); 
+
+        if(job.payload.jobId !== undefined) {
+            debugger;
+            setJobId(job.payload.jobId); 
             setJobName(job.payload.name); 
             setJobAddress(job.payload.address);
-            //setCustomerName(`${job.payload.customer?.first_name} ${job.payload.customer?.last_name}`);
+            setJobStatus(job.payload.status);
             setDescription(job.payload.description);
             setNotes(job.payload.notes);
         }
         
-    }, [indicator,job.payload]); 
+    }, [indicator, status.id]); 
 
+    
     let jobObject = {
-        id: jobId,
-        name: jobName,
-        address: jobAddress,
-        description: description,
-        status: jobStatusId,
-        //customer_id: customerId,
-        notes: notes
+        "jobId": jobId,
+        "name": jobName,
+        "address": jobAddress,
+        "description": description,
+        "jobStatusId": jobStatusId,
+        "notes": notes
     }
-
+    
+    
     const handleUserInput = event => {
         const { name, value } = event.target;
         let { helperText, fieldError } = fieldValidator(value, name);
@@ -118,8 +112,6 @@ const JobDetails = (props) => {
                     break;
             }
         }
-
-        /**/
         if (name === "address") {
             setJobAddress(value);
             switch (fieldError) {
@@ -133,7 +125,6 @@ const JobDetails = (props) => {
                     break;
             }
         }
-        /**/
         if (name === "notes") {
             setNotes(value);
             switch (fieldError) {
@@ -147,7 +138,6 @@ const JobDetails = (props) => {
                     break;
             }
         }
-
     };
 
 
@@ -177,34 +167,30 @@ const JobDetails = (props) => {
 
     const handleDropdownChange = (event, params) => {
         const { name, selectedIndex, childNodes, value } = event.target;
-        let { helperText, fieldError } = fieldValidator(value, name);//
-
+        let { helperText, fieldError } = fieldValidator(value, name);
+        
         switch (name) {
-            case 'status': // job_status_id
+            case 'job_status_id': 
                 { 
                     const index = selectedIndex;
                     const el = childNodes[index]
                     const option = el.getAttribute('id');
-
+                    
                     setJobStatus(value)
-                    setJobStatusId(Number(option));
+                    setJobStatusId(option); 
                     break;
                 }
             case 'customer_id':
                 {
                     const { user_id } = params.props;
 
-                    //if (user_id !== 0) setCustomerId(user_id);
-
                     if (fieldError === false) {
-                        //setCustomerName(value);
                         setErrors({ [name]: { helperText, fieldError } });
                     }
                     if (fieldError === true) {
                         setErrors({ [name]: { helperText, fieldError } });
                         console.log(errors)
                     }
-
                     break;
                 }
             default:
@@ -216,6 +202,7 @@ const JobDetails = (props) => {
 
     const handleSubmit = event => {
         event.preventDefault();
+        console.log(jobObject)
         dispatch(updateJob(jobObject));
         resetFields();
     };
@@ -234,6 +221,7 @@ const JobDetails = (props) => {
         setJobStatusId(1);
     }
 
+    
     return (
         <Box
             sx={{
@@ -300,7 +288,7 @@ const JobDetails = (props) => {
                         }}
                         variant="outlined"
                     >
-                        {status.map((option, key) => (
+                        {status?.payload?.map((option, key) => (
                             <option key={key} value={option.name} id={option.id}>
                                 {option.name}
                             </option>
