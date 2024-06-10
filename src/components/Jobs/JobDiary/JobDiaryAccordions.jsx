@@ -30,7 +30,7 @@ export default function JobDiaryAccordions(props) {
   const [photos, setPhotos] = useState([]);
 
   const [description, setDescription] = useState('');
-  const id = diary === undefined ? 0 : diary.rows.id;
+  const id = diary === undefined ? 0 : diary.jobId;
   const matches = useMediaQuery('(max-width:400px)');
 
   const handleChange = (panel) => (event, isExpanded) => {
