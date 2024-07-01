@@ -63,7 +63,7 @@ export default function JobDiaryAccordions(props) {
 
     return (
       <Accordion
-        key={act.id}
+        key={act.id} // worklogId
         expanded={expanded === 'panel1'}
         onChange={handleChange('panel1')}
         className="accordionMobile"
@@ -174,7 +174,7 @@ export default function JobDiaryAccordions(props) {
               textAlign: 'right'
             }}
           >
-            Job Diary
+            Worklog
           </p>
         </Grid>
         <Grid item xs={4}>

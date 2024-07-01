@@ -13,18 +13,18 @@ export default function FormDialog({ open, handleClose, handleReload, jobId }) {
   const dispatch = useDispatch();
   
   const handleSubmit = () => {
+    debugger;
     const activity = { description, jobId };
     dispatch(addActivity(activity));
     handleReload(true);
     handleClose();
   };
-  console.log('stv')
-  console.log(jobId)
-  debugger;
+  
+  
   return (
     <div>
       <Dialog open={open} onClose={handleClose} >
-        <DialogTitle>Create New Diary</DialogTitle>
+        <DialogTitle>Create New Worklog</DialogTitle>
         <DialogContent>
           <TextField
             focusColor='red'

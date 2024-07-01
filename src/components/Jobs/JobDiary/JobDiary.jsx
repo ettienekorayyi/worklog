@@ -19,8 +19,6 @@ export default function JobDiary(props) {
   const [reload, setReload] = React.useState(false);
 
   useEffect(() => {
-    debugger;
-
     if(rows !== undefined) { // history !== undefined
       setJobId(rows.jobId);
     }
