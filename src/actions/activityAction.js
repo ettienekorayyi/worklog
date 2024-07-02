@@ -7,18 +7,17 @@ export const getActivities = (loading = true, id) => async dispatch => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: `Bearer ${token}` } };
     const job = { 
-        "job_id": id
+        "jobId": id
     };
 
     try {
-        taskstechApi.post(`/get_all_activity`, job, config)
+        taskstechApi.get(`/worklog/jobId?jobId=${job.jobId}`, config)
             .then(res => {
                 dispatch({
                     type: actions.GET_ACTIVITIES_STARTED,
                     loading: loading
                 });
-                if (res.data.length !== 0) { // res.data
-                    //console.log(res.data)
+                if (res.data.length !== 0) { 
                     dispatch({
                         type: actions.GET_ACTIVITIES,
                         payload: res.data,

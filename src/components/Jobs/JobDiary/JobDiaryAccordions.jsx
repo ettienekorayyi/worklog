@@ -45,7 +45,7 @@ export default function JobDiaryAccordions(props) {
   };
 
   useEffect(() => {
-    dispatch(getActivities(true, id));
+    if(id !== 0) dispatch(getActivities(true, id));
 
     if (reload) handleReload(false);
 
@@ -60,10 +60,10 @@ export default function JobDiaryAccordions(props) {
 
 
   const activityDetails = activity.payload.map((act) => {
-
+    console.log(act)
     return (
       <Accordion
-        key={act.id} // worklogId
+        key={act.worklogId}
         expanded={expanded === 'panel1'}
         onChange={handleChange('panel1')}
         className="accordionMobile"
@@ -95,7 +95,8 @@ export default function JobDiaryAccordions(props) {
             margin="dense"
             id="name"
             label="Created on"
-            value={convertUTCTimeToLocalTime(act.create_date)}
+            value={convertUTCTimeToLocalTime(act.createdOn
+            )}
             fullWidth
             disabled
             variant="outlined"
@@ -106,7 +107,7 @@ export default function JobDiaryAccordions(props) {
             margin="dense"
             id="name"
             label="Last Updated"
-            value={convertUTCTimeToLocalTime(act.update_date)}
+            value={convertUTCTimeToLocalTime(act.lastUpdated)}
             fullWidth
             disabled
             variant="outlined"
@@ -117,7 +118,7 @@ export default function JobDiaryAccordions(props) {
             margin="dense"
             id="name"
             label="Last Updated By"
-            value={act.update_by}
+            value={act.lastUpdatedBy}
             fullWidth
             disabled
             variant="outlined"
@@ -135,7 +136,7 @@ export default function JobDiaryAccordions(props) {
                 padding: '8px 22px',
                 borderRadius: '4px'
               }}
-              onClick={() => handleClickOpenActivityDetailsForm(act.id, act.description, act.create_date, act.update_date, act.update_by, id)}
+              onClick={() => handleClickOpenActivityDetailsForm(act.jobId, act.description, act.createdOn, act.lastUpdated, act.lastUpdatedBy)}//, id
             >
               <EditIcon />
             </Button>
@@ -149,7 +150,7 @@ export default function JobDiaryAccordions(props) {
                 padding: '8px 22px',
                 borderRadius: '4px'
               }}
-
+              disabled
               onClick={() => handleClickOpenPhotoViewerDialog(act.id, act.upload_photos, act.description)}
             >
               <CameraAltIcon />
