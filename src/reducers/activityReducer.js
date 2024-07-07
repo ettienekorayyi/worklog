@@ -22,6 +22,7 @@ function activityReducer(state = initialState, action) {
         case actions.GET_ACTIVITIES_ERROR: 
             return {
                 ...state,
+                status: action.status,
                 errorMessage: action.errorMessage,
                 hasError: action.hasError,
                 loading: false

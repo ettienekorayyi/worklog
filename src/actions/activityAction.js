@@ -28,6 +28,7 @@ export const getActivities = (loading = true, id) => async dispatch => {
                 dispatch({
                     type: actions.GET_ACTIVITIES_ERROR,
                     errorMessage: error.message,
+                    status:error.response.status,
                     hasError: true,
                     loading: false
                 });

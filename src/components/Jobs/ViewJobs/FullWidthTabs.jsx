@@ -45,7 +45,7 @@ export const FullWidthTabs = ({ history, callback }) => {
   return (
     <Container maxWidth="lg" >
       <header>
-        <p className='title'>Jobs</p>
+        <h1 className='title'>Jobs</h1>
         <SearchBar setSearchInitiated={setSearchInitiated} />
         <Button
           type='submit'
