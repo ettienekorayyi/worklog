@@ -6,28 +6,32 @@ import { push } from 'connected-react-router';
 export const getActivities = (loading = true, id) => async dispatch => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: `Bearer ${token}` } };
-    const job = { 
+    const job = {
         "jobId": id
     };
 
-    try {
         taskstechApi.get(`/worklog/jobId?jobId=${job.jobId}`, config)
             .then(res => {
                 dispatch({
                     type: actions.GET_ACTIVITIES_STARTED,
                     loading: loading
                 });
-                if (res.data.length !== 0) { 
+                if (res.data.length !== 0) {
                     dispatch({
-                        type: actions.GET_ACTIVITIES,
+                        type: actions.GET_ACTIVITIES_COMPLETED,
                         payload: res.data,
+                        hasError: false,
                         loading: false
                     });
                 }
-            })
-    } catch (error) {
-        console.log(error.message)
-    }
+            }).catch((error) =>  {
+                dispatch({
+                    type: actions.GET_ACTIVITIES_ERROR,
+                    errorMessage: error.message,
+                    hasError: true,
+                    loading: false
+                });
+            });
 }
 
 export const getActivity = (loading = true) => async dispatch => {
@@ -35,7 +39,7 @@ export const getActivity = (loading = true) => async dispatch => {
     const config = { headers: { Authorization: `Bearer ${token}` } };
 
     try {
-        taskstechApi.get(`/activity/11`, config) 
+        taskstechApi.get(`/activity/11`, config)
             .then(res => {
                 dispatch({
                     type: actions.GET_ACTIVITY_STARTED,
@@ -63,7 +67,7 @@ export const addActivity = (activity) => async dispatch => {
         "upload_photo": activity.image,
         "job_id": activity.jobId
     };
-    
+
     try {
         taskstechApi.post(`/activity`, job, config)
             .then(res => {
@@ -89,7 +93,7 @@ export const updateActivity = (activity) => async dispatch => {
         //"upload_photo": activity.image,
         "job_id": activity.job_id
     };
-    
+
     try {
         taskstechApi
             .put(`/activity/${activity.id}`, job, config)

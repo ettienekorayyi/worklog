@@ -20,6 +20,7 @@ export default function JobDiaryAccordions(props) {
   const [expanded, setExpanded] = React.useState('panel1');
   const dispatch = useDispatch();
   const { activity } = useSelector(state => state);
+  useSelector(state => console.log(state));
   const {
     diary, handleReload,
     reload, handleClickOpenCreateForm,
@@ -49,7 +50,7 @@ export default function JobDiaryAccordions(props) {
 
     if (reload) handleReload(false);
 
-  }, [reload]);
+  }, [reload, activity.hasError]);
 
 
   const convertUTCTimeToLocalTime = (dateString) => {
