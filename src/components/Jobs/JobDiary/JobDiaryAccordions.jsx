@@ -13,9 +13,10 @@ import TextField from '@mui/material/TextField'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useDispatch, useSelector } from 'react-redux'
 import PhotoViewerDialog from '../../../common/PhotoViewerDialog'
+import { HttpErrorHandler } from '../../Errors/HttpErrorHandler'
 import { getActivities } from '../../../actions/activityAction'
 import './jobdiary.css'
-import { HttpErrorHandler } from '../../Errors/HttpErrorHandler'
+
 
 export default function JobDiaryAccordions (props) {
   const [expanded, setExpanded] = useState('panel1')
@@ -62,7 +63,7 @@ export default function JobDiaryAccordions (props) {
   }
 
   const activityDetails = activity.payload.map(act => {
-    console.log(act)
+    
     return (
       <Accordion
         key={act.worklogId}
@@ -175,15 +176,6 @@ export default function JobDiaryAccordions (props) {
     )
   })
 
-  const emptyWorklogs = () => {
-    return (
-      <Grid style={{ marginTop: '10rem' }}>
-        <p className='errmessage'>{message}</p>
-      </Grid>
-    )
-  }
-
-  //
   return (
     <Container maxWidth='lg' className='root'>
       {activity.hasError === true && activity.status !== 404 ? (
