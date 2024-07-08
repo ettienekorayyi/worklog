@@ -15,13 +15,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import PhotoViewerDialog from '../../../common/PhotoViewerDialog'
 import { getActivities } from '../../../actions/activityAction'
 import './jobdiary.css'
-import { NotFound } from '../../Errors/HttpErrorHandler'
+import { HttpErrorHandler } from '../../Errors/HttpErrorHandler'
 
 export default function JobDiaryAccordions (props) {
-  const [expanded, setExpanded] = React.useState('panel1')
+  const [expanded, setExpanded] = useState('panel1')
   const dispatch = useDispatch()
   const { activity } = useSelector(state => state)
-  useSelector(state => console.log(state))
+  //useSelector(state => console.log(state))
   const {
     diary,
     handleReload,
@@ -32,9 +32,9 @@ export default function JobDiaryAccordions (props) {
   const [openPhotoViewer, setOpenPhotoViewer] = useState(false)
   const [actId, setActId] = useState(0)
   const [photos, setPhotos] = useState([])
-
+  const [message, setMessage] = useState('')
   const [description, setDescription] = useState('')
-  const id = diary === undefined ? 0 : diary.jobId
+  const id = diary === undefined ? 0 : diary.jobId //
   const matches = useMediaQuery('(max-width:400px)')
 
   const handleChange = panel => (event, isExpanded) => {
@@ -50,7 +50,8 @@ export default function JobDiaryAccordions (props) {
 
   useEffect(() => {
     if (id !== 0) dispatch(getActivities(true, id))
-
+    if (activity.payload.length === 0)
+      setMessage('Your Worklog is currently empty! Start adding your logs now.')
     if (reload) handleReload(false)
   }, [reload, activity.hasError])
 
@@ -174,10 +175,22 @@ export default function JobDiaryAccordions (props) {
     )
   })
 
+  const emptyWorklogs = () => {
+    return (
+      <Grid style={{ marginTop: '10rem' }}>
+        <p className='errmessage'>{message}</p>
+      </Grid>
+    )
+  }
+
+  //
   return (
     <Container maxWidth='lg' className='root'>
-      {activity.hasError == true ? (
-        <NotFound status={activity.status} errorMessage={activity.errorMessage}/>
+      {activity.hasError === true && activity.status !== 404 ? (
+        <HttpErrorHandler
+          status={activity.status}
+          errorMessage={activity.errorMessage}
+        />
       ) : (
         <Grid container spacing={0} className='accordion'>
           <Grid item xs={8}>
@@ -206,7 +219,11 @@ export default function JobDiaryAccordions (props) {
             </Button>
           </Grid>
           <Grid item xs={12}>
-            {activityDetails}
+            {activity.payload.length === 0 ? (
+              <HttpErrorHandler errorMessage={message} />
+            ) : (
+              activityDetails
+            )}
           </Grid>
           <Grid item xs={4}>
             <PhotoViewerDialog
