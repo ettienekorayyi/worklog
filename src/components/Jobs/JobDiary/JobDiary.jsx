@@ -19,8 +19,8 @@ export default function JobDiary(props) {
   const [reload, setReload] = React.useState(false);
 
   useEffect(() => {
-    if(history !== undefined) {
-      setJobId(history?.location.state.rows.rows.id);
+    if(rows !== undefined) { // history !== undefined
+      setJobId(rows.jobId);
     }
   },[])
   
@@ -57,7 +57,7 @@ export default function JobDiary(props) {
           openActivityForm === true
             ? <FormDialog
               open={openActivityForm}
-              jobId={history?.location.state.rows.rows.id}
+              jobId={history?.location.state.rows.jobId}
               handleClose={handleCloseForm}
               handleReload={handleReload}
             />

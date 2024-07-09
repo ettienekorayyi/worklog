@@ -7,39 +7,24 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useDispatch } from 'react-redux';
 import { addActivity } from '../actions/activityAction';
-//import { makeStyles } from "@material-ui/core/styles";
-/*
-const focusedColor = "#000";
-
-const useStyles = makeStyles({
-  root: {
-    // input label when focused
-    "& label.Mui-focused": {
-      color: focusedColor
-    },
-    // focused color for input with variant='standard'
-    "& .MuiInput-underline:after": {
-      borderBottomColor: focusedColor
-    },
-  }
-});*/
 
 export default function FormDialog({ open, handleClose, handleReload, jobId }) {
   const [description, setDescription] = useState('');
   const dispatch = useDispatch();
-  //const classes = useStyles();
   
   const handleSubmit = () => {
+    debugger;
     const activity = { description, jobId };
     dispatch(addActivity(activity));
     handleReload(true);
     handleClose();
   };
-
+  
+  
   return (
     <div>
       <Dialog open={open} onClose={handleClose} >
-        <DialogTitle>Create New Diary</DialogTitle>
+        <DialogTitle>Create New Worklog</DialogTitle>
         <DialogContent>
           <TextField
             focusColor='red'
@@ -58,7 +43,7 @@ export default function FormDialog({ open, handleClose, handleReload, jobId }) {
             margin="dense"
             id="name"
             label="Job Id"
-            type="number"
+            type="text"
             fullWidth
             variant="standard"
             value={jobId} 

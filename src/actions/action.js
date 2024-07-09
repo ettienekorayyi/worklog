@@ -15,7 +15,6 @@ export const getJob = (id) => async dispatch => {
         let job = await taskstechApi.get(`/job/id?id=${id}`, config);
 
         if (job.data) {
-            console.log(job.data)
             dispatch({ type: actions.GET_JOB, payload: job.data, loading: false });
         }
     } catch (error) {

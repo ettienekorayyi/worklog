@@ -11,6 +11,22 @@
 
 /****** Mobile Portrait Mode ******/
 @media only screen and (min-width: 280px) and (max-width: 500px) and (max-height: 933px) and (orientation: portrait) {
+    /******  Bad Request ******/
+    h1[class$='error'] {
+        font-size: 10rem;
+    }
+
+    h1[class^='worklog'] {
+        font-family: Comfortaa;
+        margin-top: 8rem;
+        margin-bottom: 1rem;
+    }
+
+    p[class^='errmessage'] {
+        font-family: Comfortaa;
+        font-size: 1.2rem;
+    }
+
     /******  Controlled Accordions ******/
     .MuiTypography-body1 { text-align: left; }
 

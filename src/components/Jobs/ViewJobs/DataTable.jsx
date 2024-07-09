@@ -45,12 +45,13 @@ export default function DataTable(props) {
     
     parentCallback(params);
   };
-
+  
   const handleJobDetailsClick = (event, rows) => {
+    
     const params = {
       rows,
       componentType: 'jobDetails',
-      detailsPath: `/view/jobs/details/${rows.row.id}`
+      detailsPath: `/view/jobs/details/${rows.jobId}`
     };
     
     parentCallback(params);
@@ -88,7 +89,7 @@ export default function DataTable(props) {
   }
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
+    { field: 'jobId', headerName: 'ID', width: 90 },
     {
       field: 'name',
       headerName: 'Name',

@@ -12,10 +12,19 @@ function activityReducer(state = initialState, action) {
                 ...state,
                 loading: true
             };
-        case actions.GET_ACTIVITIES:
+        case actions.GET_ACTIVITIES_COMPLETED:
             return {
                 ...state,
                 payload: action.payload,
+                hasError: action.hasError,
+                loading: false
+            };
+        case actions.GET_ACTIVITIES_ERROR: 
+            return {
+                ...state,
+                status: action.status,
+                errorMessage: action.errorMessage,
+                hasError: action.hasError,
                 loading: false
             };
         case actions.GET_ACTIVITY_STARTED:

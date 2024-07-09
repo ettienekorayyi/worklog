@@ -59,7 +59,6 @@ const JobDetails = (props) => {
         if(jobs?.row?.jobId !== undefined) dispatch(getJob(jobs?.row?.jobId));
 
         if(job.payload.jobId !== undefined) {
-            debugger;
             setJobId(job.payload.jobId); 
             setJobName(job.payload.name); 
             setJobAddress(job.payload.address);

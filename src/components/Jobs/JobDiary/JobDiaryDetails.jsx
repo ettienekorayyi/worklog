@@ -21,7 +21,7 @@ export default function JobDiaryDetails({
     job_id: jobId,
     description: desc
   };
-  console.log(activity); 
+ 
   const handleOnChange = ({ target }) => setDesc(target.value);
   const handleUpdate = () => dispatch(updateActivity(activity));
 
