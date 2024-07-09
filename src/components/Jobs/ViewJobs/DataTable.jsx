@@ -45,7 +45,7 @@ export default function DataTable(props) {
     
     parentCallback(params);
   };
-  console.log(props.stv)
+  
   const handleJobDetailsClick = (event, rows) => {
     
     const params = {
