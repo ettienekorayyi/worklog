@@ -56,14 +56,14 @@ export default function JobDiaryAccordions (props) {
     if (reload) handleReload(false)
   }, [reload, activity.hasError])
 
-  const convertUTCTimeToLocalTime = dateString => {
-    let utcDate = new Date(dateString).toISOString()
-    const date = new Date(utcDate)
-    return date.toLocaleString()
+  const convertUTCTimeToLocalTime = (dateString) => {
+    var splitDate = dateString.split("/");
+    let utcDate = new Date(Date.UTC(splitDate[2], splitDate[0] - 1, splitDate[1]))
+    
+    return utcDate.toLocaleString();
   }
 
   const activityDetails = activity.payload.map(act => {
-    
     return (
       <Accordion
         key={act.worklogId}
@@ -97,7 +97,7 @@ export default function JobDiaryAccordions (props) {
             margin='dense'
             id='name'
             label='Created on'
-            value={convertUTCTimeToLocalTime(act.createdOn)}
+            value={convertUTCTimeToLocalTime(act.createdOn, act.description, 'createdOn')}
             fullWidth
             disabled
             variant='outlined'
@@ -108,7 +108,7 @@ export default function JobDiaryAccordions (props) {
             margin='dense'
             id='name'
             label='Last Updated'
-            value={convertUTCTimeToLocalTime(act.lastUpdated)}
+            value={convertUTCTimeToLocalTime(act.lastUpdated, act.description, 'lastUpdated')}
             fullWidth
             disabled
             variant='outlined'
@@ -175,15 +175,10 @@ export default function JobDiaryAccordions (props) {
       </Accordion>
     )
   })
-
+  
   return (
     <Container maxWidth='lg' className='root'>
-      {activity.hasError === true && activity.status !== 404 ? (
-        <HttpErrorHandler
-          status={activity.status}
-          errorMessage={activity.errorMessage}
-        />
-      ) : (
+      {(
         <Grid container spacing={0} className='accordion'>
           <Grid item xs={8}>
             <p
