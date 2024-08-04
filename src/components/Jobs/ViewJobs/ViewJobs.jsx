@@ -19,7 +19,8 @@ export default function ViewJobs(props) {
         switch (type) {
             case 'diary':
                 return <JobDiary 
-                    rows={params} onClick={history.push({
+                    rows={params} 
+                    onClick={history.push({
                     pathname: "/view/jobs/diary",
                     state: { rows: params }
                 })} />
@@ -27,7 +28,7 @@ export default function ViewJobs(props) {
                 return <JobDetails 
                     rows={params} 
                     path={path} 
-                    onClick={history.push({pathname: path,})} 
+                    onClick={() => history.push({pathname: path,})} 
                 />
             default:
                 return <FullWidthTabs history={history} callback={callback} />
