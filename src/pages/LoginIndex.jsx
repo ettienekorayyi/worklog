@@ -1,13 +1,11 @@
 import React from "react";
 import Button from "@mui/material/Button";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import CssBaseline from "@mui/material/CssBaseline";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import { styled } from "@mui/system";
 import worklog_logo from "../common/assets/images/worklog_logo1.png";
-import "../common/assets/css/apple.css";
 
 const StyledGrid = styled(Grid)(({ theme }) => ({
     height: "100vh",
@@ -32,25 +30,6 @@ const StyledGrid = styled(Grid)(({ theme }) => ({
 }));
 
 export default function LoginIndex ({ history }) {
-    /*
-    const matchesIphone678Viewport = useMediaQuery(
-        "(max-width: 376px) and (max-height: 668px)"
-    );
-    const matchesIphone4Viewport = useMediaQuery(
-        "(max-width: 320px) and (max-height: 480px)"
-    );
-
-    const iphone4 = {
-        properties: {
-            name: "iphone4",
-            viewport: "aquamarine !important",
-            height: "15vh !important",
-        },
-    };
-    */
-
-    const matches = useMediaQuery("(max-width:600px)");
-
     return (
         <StyledGrid container component='main' className={`root`}>
             <CssBaseline />

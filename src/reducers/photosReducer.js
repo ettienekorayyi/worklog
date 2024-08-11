@@ -4,7 +4,8 @@ import unknownPhoto from '../common/assets/images/blank-profile-picture.png';
 
 const initialState = {
     "filename": "",
-    "filename_thumb": ""
+    "filename_thumb": "",
+    "payload": [],
 };
 
 function photosReducer(state = initialState, action) {
@@ -19,7 +20,7 @@ function photosReducer(state = initialState, action) {
             return {
                 ...state,
                 payload: action.payload,
-                filename: action.payload?.filename,
+                filename: action.payload,//.filename
                 thumbnail: action.payload?.thumbnail,
                 loading: false,
                 showModal: true
@@ -33,7 +34,8 @@ function photosReducer(state = initialState, action) {
         case actions.GET_PHOTO_SUCCESS:
             return {
                 ...state,
-                filename: action.filename,
+                payload: action.payload,
+                fileData: action.fileData,
                 loading: false
             };
         case actions.GET_PHOTO_FAILED:
