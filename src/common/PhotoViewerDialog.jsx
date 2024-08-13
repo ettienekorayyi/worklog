@@ -63,7 +63,7 @@ export default function PhotoViewerDialog ({
   openPhotoViewer,
   setOpenPhotoViewer,
   actId,
-  description // uploadedPhotos
+  description
 }) {
   const dispatch = useDispatch()
   const { photos } = useSelector(state => state)
@@ -75,7 +75,8 @@ export default function PhotoViewerDialog ({
       // uploadedPhotos !== undefined &&
       dispatch(getPhoto(actId))
     }
-  }, [actId]) 
+
+  }, [actId])
 
   //const handleReload = (arg) => setReload(arg);
   const handleClosePhotoViewer = () => setOpenPhotoViewer(false)
@@ -86,6 +87,7 @@ export default function PhotoViewerDialog ({
   }
 
   //const imageSrc = `data:image/png;base64,${photos.fileData}`
+  const base64 = 'data:image/jpeg;charset=utf-8;base64,'
 
   const photoViewer = () => {
     return (
@@ -101,17 +103,17 @@ export default function PhotoViewerDialog ({
           {description}
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          {
-            //src={`data:image/jpeg;base64,${data}`}
-
-            photos.loading !== true ? (
-              <img src={photos.fileData} style={{ width: '100%' }} />
+          {photos.loading !== true ? (
+            photos.payload.length !== 0 ? (
+              photos.payload.map(x => <p>{x.fileName} photo</p>)
             ) : (
-              <>
-                <SimpleBackdrop loading={photos.loading} />
-              </>
+              <p>No photos found.</p>
             )
-          }
+          ) : (
+            <>
+              <SimpleBackdrop loading={photos.loading} />
+            </>
+          )}
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleSubmit}>

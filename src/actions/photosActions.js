@@ -46,15 +46,18 @@ export const getPhoto = (worklogId) => async dispatch => {
     });
 
     let response = await taskstechApi.get(`/media/id?id=${worklogId}`);
-    if(response.data) {
+    if (response.data.length !== 0) { 
         dispatch({
             type: actions.GET_PHOTO_SUCCESS,
-            //filename: `${base64}${Buffer.from(res.data, "binary").toString("base64")}`,
             payload: response.data,
-            fileData: `data:image/png;base64,${response.data[0].fileData}`,
+            fileData: `${base64}${response.data[0].fileData}`,
             loading: false
         });
+    } 
+    else {
+        dispatch({ type: actions.GET_PHOTO_FAILED, payload: [], loading: false });
     }
+    
 }
 
 /*

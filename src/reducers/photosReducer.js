@@ -42,6 +42,7 @@ function photosReducer(state = initialState, action) {
             return {
                 ...state,
                 filename: unknownPhoto,
+                payload: action.payload,
                 loading: false
             };
         default:
