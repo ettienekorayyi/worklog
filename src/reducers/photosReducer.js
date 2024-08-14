@@ -1,6 +1,5 @@
 import * as actions from '../actions/actionTypes';
 import unknownPhoto from '../common/assets/images/blank-profile-picture.png';
-//../../../common/assets/images/blank-profile-picture.png
 
 const initialState = {
     "filename": "",

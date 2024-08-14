@@ -65,17 +65,17 @@ export default function PhotoViewerDialog ({
   actId,
   description
 }) {
+  
   const dispatch = useDispatch()
   const { photos } = useSelector(state => state)
   const [submitBtnIsClicked, setSubmitBtnIsClicked] = useState(false)
   const [openPhotoUpload, setOpenPhotoUpload] = useState(false)
-
+  const base64 = 'data:image/jpeg;charset=utf-8;base64,'
+  
   useEffect(() => {
     if (actId !== 0) {
-      // uploadedPhotos !== undefined &&
       dispatch(getPhoto(actId))
     }
-
   }, [actId])
 
   //const handleReload = (arg) => setReload(arg);
@@ -85,9 +85,6 @@ export default function PhotoViewerDialog ({
     setOpenPhotoUpload(true)
     setSubmitBtnIsClicked(true)
   }
-
-  //const imageSrc = `data:image/png;base64,${photos.fileData}`
-  const base64 = 'data:image/jpeg;charset=utf-8;base64,'
 
   const photoViewer = () => {
     return (
@@ -105,7 +102,10 @@ export default function PhotoViewerDialog ({
         <DialogContent dividers>
           {photos.loading !== true ? (
             photos.payload.length !== 0 ? (
-              photos.payload.map(x => <p>{x.fileName} photo</p>)
+              <img
+                src={`${base64}${photos.payload[0].fileData}`}
+                style={{ width: '100%' }}
+              />
             ) : (
               <p>No photos found.</p>
             )
