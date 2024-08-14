@@ -42,9 +42,9 @@ export default function JobDiaryAccordions (props) {
     setExpanded(isExpanded ? panel : false)
   }
 
-  const handleClickOpenPhotoViewerDialog = (id, photos, description) => {
-    setActId(id)
-    setPhotos(photos)
+  const handleClickOpenPhotoViewerDialog = (worklogId,  description) => {//photos,
+    setActId(worklogId)
+    //setPhotos(photos)
     setDescription(description)
     setOpenPhotoViewer(true)
   }
@@ -139,7 +139,7 @@ export default function JobDiaryAccordions (props) {
               }}
               onClick={() =>
                 handleClickOpenActivityDetailsForm(
-                  act.jobId,
+                  act.worklogId,
                   act.description,
                   act.createdOn,
                   act.lastUpdated,
@@ -159,11 +159,11 @@ export default function JobDiaryAccordions (props) {
                 padding: '8px 22px',
                 borderRadius: '4px'
               }}
-              disabled
+              
               onClick={() =>
                 handleClickOpenPhotoViewerDialog(
-                  act.id,
-                  act.upload_photos,
+                  act.worklogId,
+                  //act.upload_photos,
                   act.description
                 )
               }
