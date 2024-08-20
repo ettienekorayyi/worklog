@@ -29,7 +29,6 @@ export default function FormDialog({ open, handleClose, handleReload, jobId }) {
           <TextField
             focusColor='red'
             autoFocus
-            //className={classes.root}
             margin="dense"
             id="name"
             label="Description"

@@ -26,8 +26,8 @@ export default function PhotoUploadForm({
     if (image !== '') {
       const formData = new FormData();
       formData.append('file', image);
-      formData.append('activity_id', actId);
-
+      formData.append('worklogId', actId);
+      
       dispatch(addPhoto(formData));
       handleClear();
     } else console.log('File is empty')
@@ -47,7 +47,7 @@ export default function PhotoUploadForm({
       setPreview(URL.createObjectURL(file));
     }
   };
-  console.log(photos.showModal)
+  
   return (
     <>
       <Dialog open={openPhotoUpload} onClose={handleClosePhotoUpload} >

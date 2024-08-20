@@ -78,7 +78,6 @@ export default function PhotoViewerDialog ({
     }
   }, [actId])
 
-  //const handleReload = (arg) => setReload(arg);
   const handleClosePhotoViewer = () => setOpenPhotoViewer(false)
 
   const handleSubmit = () => {
@@ -103,7 +102,7 @@ export default function PhotoViewerDialog ({
           {photos.loading !== true ? (
             photos.payload.length !== 0 ? (
               <img
-                src={`${base64}${photos.payload[0].fileData}`}
+                src={`${base64}${photos.payload[photos.payload.length-1].fileData}`}
                 style={{ width: '100%' }}
               />
             ) : (

@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import Button from '@mui/material/Button'
-//import useMediaQuery from "@mui/material/useMediaQuery";
 import CssBaseline from '@material-ui/core/CssBaseline'
 import TextField from '@mui/material/TextField'
 import Link from '@mui/material/Link'
@@ -9,7 +8,6 @@ import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
 import { styled } from '@mui/system'
-//import Logo from "../../components/logo/Logo";
 import { signIn } from '../../actions/action'
 import wave from '../../components/logo/wave.png'
 import worklog_logo from '../../common/assets/images/worklog_logo1.png'
@@ -63,7 +61,6 @@ export default function Login () {
       <CssBaseline />
       <div className={`loginContainer`}>
         <div>
-          {/*matches === true ? <></> : <Logo  />*/}
           <div id='wave-container'>
             <img id='wave' className='wave waveMobile' src={wave} />
           </div>

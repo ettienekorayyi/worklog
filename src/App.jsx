@@ -22,7 +22,7 @@ export const history = History.createBrowserHistory();
 function App () {
     const matches = useMediaQuery("(max-width:1200px)");
     let url = matches === true ? "/mobile-login" : "/login";
-    let loginRenderer = matches === true ? Pages.LoginIndex : GenericMessage; // Pages.Login Add component here
+    let loginRenderer = matches === true ? Pages.LoginIndex : GenericMessage;
 
     return (
         
