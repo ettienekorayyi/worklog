@@ -12,7 +12,6 @@ import Lookup from '../../../common/Lookup'
 import { useDispatch, useSelector } from 'react-redux'
 import SimpleBackdrop from '../../Loading/SimpleBackdrop'
 import { getStatus } from '../../../actions/action'
-//import { getCustomers } from "../../../actions/customerActions";
 import { createJob } from '../../../actions/action'
 import { useState } from 'react'
 

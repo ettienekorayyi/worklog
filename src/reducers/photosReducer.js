@@ -19,8 +19,6 @@ function photosReducer(state = initialState, action) {
             return {
                 ...state,
                 payload: action.payload,
-                filename: action.payload,//.filename
-                thumbnail: action.payload?.thumbnail,
                 loading: false,
                 showModal: true
             };

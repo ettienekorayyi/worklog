@@ -1,9 +1,14 @@
 import taskstechApi from '../api/taskstechApi';
 import * as actions from './actionTypes';
-import unknownPhoto from '../common/assets/images/blank-profile-picture.png';
 
-export const addPhoto = (photoData) => async dispatch => {
+export const addPhoto = (media) => async dispatch => {
     const token = localStorage.getItem('token');
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data'
+        }
+    };
 
     try {
         dispatch({
@@ -11,25 +16,15 @@ export const addPhoto = (photoData) => async dispatch => {
             loading: true,
             showModal: false
         });
-
-        taskstechApi.post(`/photos`, photoData, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'multipart/form-data'
-            }
-        })
-            .then(res => {
-                if (res.data) {
-                    console.log(res.data)
-                    dispatch({
-                        type: actions.UPLOAD_PHOTO_SUCCESS,
-                        filename: res.data.filename,
-                        thumbnail: res.data.thumbnail,
-                        loading: false,
-                        showModal: true
-                    });
-                }
-            })
+        
+        taskstechApi.post(`/media`, media, config)
+            .then((res) => { 
+                dispatch({
+                    type: actions.UPLOAD_PHOTO_SUCCESS,
+                    payload: res.data,
+                    loading: false
+                })
+            });
     } catch (error) {
         console.log(error.message)
     }
@@ -38,7 +33,6 @@ export const addPhoto = (photoData) => async dispatch => {
 
 export const getPhoto = (worklogId) => async dispatch => {
     const base64 = 'data:image/jpeg;charset=utf-8;base64,';
-    const config = { responseType: "arraybuffer" };
 
     dispatch({
         type: actions.GET_PHOTO_STARTED,
@@ -46,26 +40,17 @@ export const getPhoto = (worklogId) => async dispatch => {
     });
 
     let response = await taskstechApi.get(`/media/id?id=${worklogId}`);
-    if (response.data.length !== 0) { 
+
+    if (response.data.length !== 0) {
         dispatch({
             type: actions.GET_PHOTO_SUCCESS,
             payload: response.data,
             fileData: `${base64}${response.data[0].fileData}`,
             loading: false
         });
-    } 
+    }
     else {
         dispatch({ type: actions.GET_PHOTO_FAILED, payload: [], loading: false });
     }
-    
-}
 
-/*
-.then(() => {
-                dispatch({
-                    type: actions.NO_PHOTO,
-                    filename: unknownPhoto,
-                    loading: false
-                });
-            })
-*/
+}
