@@ -15,6 +15,7 @@ import SettingsPowerIcon from "@material-ui/icons/SettingsPower";
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import PieChartIcon from '@mui/icons-material/PieChart';
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import { withRouter } from "react-router-dom";
@@ -56,6 +57,11 @@ function SwipeableEdgeDrawer(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   const rightSideData = [
+    {
+      text: "Dashboard",
+      icon: <PieChartIcon />,
+      onClick: () => history.push("/dashboard/"),
+    },
     {
       text: "New Job",
       icon: <CreateIcon />,
