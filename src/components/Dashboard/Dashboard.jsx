@@ -13,13 +13,14 @@ const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: 'center',
-  borderRadius: '30px',
-  border: '2px solid black',
-  boxShadow: '1px 1px 7px 1px #414a4c',
   color: theme.palette.text.secondary,
   ...theme.applyStyles('dark', {
-    backgroundColor: '#1A2027'
-  })
+    backgroundColor: '#1A2027',
+  }),
+  borderRadius: '1rem',
+  boxShadow: '2px 1px 3px 3px #36454F',
+  width: '6rem',
+  margin: '0 auto',
 }))
 
 export default function DashboardGrid () {
@@ -38,44 +39,44 @@ export default function DashboardGrid () {
         sx={{
           flexGrow: 1,
           marginTop: '2rem',
-          marginLeft: '-1.5rem',
+          marginLeft: '-6.0rem',
           marginBottom: '5rem',
-          width: '25rem'
+         
         }}
       >
-        <Grid container rowSpacing={2} columnSpacing={3} spacing={2}>
-        <Grid item xs={8}>
-            <Item sx={{ foregroundColor: 'black' }}>
-              <DashboardCard title='Completed Jobs' />
-            </Item>
-          </Grid>
-          <Grid item xs={8}>
-            <Item>
-              <DashboardCard title='Pending Jobs' />
-            </Item>
-          </Grid>
-          <Grid item xs={8}>
-            <Item>
-            <DashboardCard title='Not Started Jobs' />
-            </Item>
-          </Grid>
-          {/*
-          <Grid item xs={8}>
-            <Item sx={{ foregroundColor: 'black' }}>
-              <DashboardCard title='Completed Jobs' />
-            </Item>
-          </Grid>
-          <Grid item xs={8}>
-            <Item>
-              <DashboardCard title='Pending Jobs' />
-            </Item>
-          </Grid>
-          <Grid item xs={8}>
-            <Item>
-            <DashboardCard title='Not Started Jobs' />
-            </Item>
-          </Grid>
-          */}
+        <Grid container spacing={5} rowSpacing={2} columnSpacing={14}>
+          <Grid item xs={2}>
+              <Item sx={{ foregroundColor: 'black' }}>
+                <DashboardCard title='Completed Jobs' />
+              </Item>
+            </Grid>
+            <Grid item xs={2}>
+              <Item>
+                <DashboardCard title='Pending Jobs' />
+              </Item>
+            </Grid>
+            <Grid item xs={2}>
+              <Item>
+              <DashboardCard title='Jobs Not Started ' />
+              </Item>
+            </Grid>
+            {/*
+            <Grid item xs={8}>
+              <Item sx={{ foregroundColor: 'black' }}>
+                <DashboardCard title='Completed Jobs' />
+              </Item>
+            </Grid>
+            <Grid item xs={8}>
+              <Item>
+                <DashboardCard title='Pending Jobs' />
+              </Item>
+            </Grid>
+            <Grid item xs={8}>
+              <Item>
+              <DashboardCard title='Not Started Jobs' />
+              </Item>
+            </Grid>
+            */}
         </Grid>
       </Box>
     </Container>
