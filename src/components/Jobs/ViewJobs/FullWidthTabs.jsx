@@ -5,9 +5,9 @@ import { useTheme } from '@mui/material/styles'
 import AppBar from '@mui/material/AppBar'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
-import { TabPanel, a11yProps } from '../../../common/TabMenu/TabStyles'
-import useMediaQuery from '@mui/material/useMediaQuery'
-import { useDispatch, useSelector } from 'react-redux'
+import { TabPanel, a11yProps } from '../../../common/TabMenu/TabStyles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useDispatch, useSelector } from 'react-redux';
 import { getAllJobs } from '../../../actions/action'
 import DataTable from './DataTable'
 import ControlledAccordions from './ControlledAccordions'

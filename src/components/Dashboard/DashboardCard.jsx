@@ -17,8 +17,8 @@ const card = (title) => (
         20
       </Typography>
       <Typography sx={{ color: 'text.secondary', mb: 1.5 }}>
-        <ArrowUpwardIcon sx={{ position: 'relative', top: '5px', right: '2px', color: 'green' }} />
-        <Typography variant="span">12% since last month. </Typography>
+        {/* <ArrowUpwardIcon sx={{ position: 'relative', top: '5px', right: '2px', color: 'green' }} /> */}
+        <Typography variant="span"></Typography>
       </Typography>
       
     </CardContent>
