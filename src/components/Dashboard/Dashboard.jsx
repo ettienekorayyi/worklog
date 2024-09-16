@@ -7,6 +7,7 @@ import DashboardCard from './DashboardCard'
 import Container from '@mui/material/Container'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllJobs } from '../../actions/action'
+import { PieChart } from '@material-ui/icons'
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -15,12 +16,28 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
   ...theme.applyStyles('dark', {
-    backgroundColor: '#1A2027',
+    backgroundColor: '#1A2027'
   }),
   borderRadius: '1rem',
   boxShadow: '2px 1px 3px 3px #36454F',
   width: '6rem',
-  margin: '0 auto',
+  margin: '0 auto'
+}))
+
+const PieChartItem = styled(Paper)(({ theme }) => ({
+  backgroundColor: '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+  ...theme.applyStyles('dark', {
+    backgroundColor: '#1A2027'
+  }),
+  borderRadius: '1rem',
+  boxShadow: '2px 1px 3px 3px #36454F',
+  marginTop: '2.0rem',
+  marginLeft: '6.0rem',
+  height: '20rem'
 }))
 
 export default function DashboardGrid () {
@@ -34,51 +51,7 @@ export default function DashboardGrid () {
   }, [])
 
   return (
-    <Container>
-      <Box
-        sx={{
-          flexGrow: 1,
-          marginTop: '2rem',
-          marginLeft: '-6.0rem',
-          marginBottom: '5rem',
-         
-        }}
-      >
-        <Grid container spacing={5} rowSpacing={2} columnSpacing={14}>
-          <Grid item xs={2}>
-              <Item sx={{ foregroundColor: 'black' }}>
-                <DashboardCard title='Completed Jobs' />
-              </Item>
-            </Grid>
-            <Grid item xs={2}>
-              <Item>
-                <DashboardCard title='Pending Jobs' />
-              </Item>
-            </Grid>
-            <Grid item xs={2}>
-              <Item>
-              <DashboardCard title='Jobs Not Started ' />
-              </Item>
-            </Grid>
-            {/*
-            <Grid item xs={8}>
-              <Item sx={{ foregroundColor: 'black' }}>
-                <DashboardCard title='Completed Jobs' />
-              </Item>
-            </Grid>
-            <Grid item xs={8}>
-              <Item>
-                <DashboardCard title='Pending Jobs' />
-              </Item>
-            </Grid>
-            <Grid item xs={8}>
-              <Item>
-              <DashboardCard title='Not Started Jobs' />
-              </Item>
-            </Grid>
-            */}
-        </Grid>
-      </Box>
-    </Container>
+    <PieChart />
+
   )
 }
