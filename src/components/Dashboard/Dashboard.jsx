@@ -51,7 +51,38 @@ export default function DashboardGrid () {
   }, [])
 
   return (
-    <PieChart />
-
+    <Container>
+      <Box
+        sx={{
+          flexGrow: 1,
+          marginTop: '2rem',
+          marginLeft: '-6.0rem',
+          marginBottom: '5rem'
+        }}
+      >
+        <Grid container spacing={5} rowSpacing={2} columnSpacing={14}>
+          <Grid item xs={2}>
+            <Item sx={{ foregroundColor: 'black' }}>
+              <DashboardCard title='Completed Jobs' />
+            </Item>
+          </Grid>
+          <Grid item xs={2}>
+            <Item>
+              <DashboardCard title='Pending Jobs' />
+            </Item>
+          </Grid>
+          <Grid item xs={2}>
+            <Item>
+              <DashboardCard title='Jobs Not Started ' />
+            </Item>
+          </Grid>
+          <Grid item xs={12} id='pie-chart-grid'>
+            <PieChartItem>
+              <PieChart />
+            </PieChartItem>
+          </Grid>
+        </Grid>
+      </Box>
+    </Container>
   )
 }

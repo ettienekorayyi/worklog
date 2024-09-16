@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { PieChart } from '@mui/x-charts/PieChart';
+import { PieChart } from '@mui/x-charts';
 
 export default function BasicPie() {
   return (
     <PieChart
+      sx={{ width: '15em', height: '15em' }}
       series={[
         {
           data: [
@@ -13,8 +14,7 @@ export default function BasicPie() {
           ],
         },
       ]}
-      width={400}
-      height={200}
+      
     />
   );
 }
