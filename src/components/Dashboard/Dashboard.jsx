@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid'
 import DashboardCard from './DashboardCard'
 import Container from '@mui/material/Container'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllJobs } from '../../actions/action'
+import { getAllJobs, getStatus } from '../../actions/action'
 import { PieChart } from '@material-ui/icons'
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -41,13 +41,24 @@ const PieChartItem = styled(Paper)(({ theme }) => ({
 }))
 
 export default function DashboardGrid () {
-  const { jobs } = useSelector(state => state)
+  const { jobs, status } = useSelector(state => state)
+  useSelector(state => console.log(state))
   const dispatch = useDispatch()
-  // Get Total Job Counts per status
+  
+  const filteredJobs = jobs.payload.filter(job => {
+     const jobStatus = status.payload?.find(jobStatus => jobStatus.id === job.statusId);
+     job.status = jobStatus?.name;
+    return {...job, ...jobStatus}
+  }, {})
+
+
+  const findTotalJobs = (status) => filteredJobs?.filter(job => job.status === status);
+
   // Get Overall Total Job Counts
 
   useEffect(() => {
     dispatch(getAllJobs())
+    dispatch(getStatus())
   }, [])
 
   return (
@@ -63,17 +74,17 @@ export default function DashboardGrid () {
         <Grid container spacing={5} rowSpacing={2} columnSpacing={14}>
           <Grid item xs={2}>
             <Item sx={{ foregroundColor: 'black' }}>
-              <DashboardCard title='Completed Jobs' />
+              <DashboardCard title='Completed Jobs' total={findTotalJobs('Completed')?.length} />
             </Item>
           </Grid>
           <Grid item xs={2}>
             <Item>
-              <DashboardCard title='Pending Jobs' />
+              <DashboardCard title='Pending Jobs' total={findTotalJobs('In Progress')?.length} />
             </Item>
           </Grid>
           <Grid item xs={2}>
             <Item>
-              <DashboardCard title='Jobs Not Started ' />
+              <DashboardCard title='Jobs Not Started' total={findTotalJobs('Not Started')?.length} />
             </Item>
           </Grid>
           <Grid item xs={12} id='pie-chart-grid'>
