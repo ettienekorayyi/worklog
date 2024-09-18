@@ -54,8 +54,6 @@ export default function DashboardGrid () {
 
   const findTotalJobs = (status) => filteredJobs?.filter(job => job.status === status);
 
-  // Get Overall Total Job Counts
-
   useEffect(() => {
     dispatch(getAllJobs())
     dispatch(getStatus())
