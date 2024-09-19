@@ -58,8 +58,6 @@ export default function DashboardGrid () {
   useEffect(() => {
     dispatch(getAllJobs())
     dispatch(getStatus())
-
-    //if(filteredJobs !== null || undefined) setCompleted(findTotalJobs('Completed')?.length)
   }, [])
 
   return (
