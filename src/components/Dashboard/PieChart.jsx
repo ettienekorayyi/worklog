@@ -12,7 +12,7 @@ export default function BasicPie({completed,pending,active}) {
             { id: 1, value: pending / 3 * 100, label: 'Pending', color: '#4E545C' },
             { id: 2, value: active / 3 * 100, label: 'Not Started', color: '#8D9797' },
           ],
-          color: 'red'
+          
         },
       ]}
       slotProps={{

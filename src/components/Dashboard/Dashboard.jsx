@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { styled } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
@@ -42,6 +42,7 @@ const PieChartItem = styled(Paper)(({ theme }) => ({
 
 export default function DashboardGrid () {
   const { jobs, status } = useSelector(state => state)
+  const [completed, setCompleted] = useState(0);
 
   const dispatch = useDispatch()
   
@@ -57,6 +58,8 @@ export default function DashboardGrid () {
   useEffect(() => {
     dispatch(getAllJobs())
     dispatch(getStatus())
+
+    //if(filteredJobs !== null || undefined) setCompleted(findTotalJobs('Completed')?.length)
   }, [])
 
   return (
@@ -88,9 +91,9 @@ export default function DashboardGrid () {
           <Grid item xs={12} id='pie-chart-grid'>
             <PieChartItem>
               <BasicPie 
-                  completed={2}
-                  pending={3}
-                  active={5}
+                  completed={findTotalJobs('Completed')?.length}
+                  pending={findTotalJobs('In Progress')?.length}
+                  active={findTotalJobs('Not Started')?.length}
               />
             </PieChartItem>
           </Grid>
