@@ -21,11 +21,6 @@ button.customButtons {
     width: 34vw;
 }
 
-#pie-chart-grid svg.MuiSvgIcon-root {
-    width: inherit;
-    height: inherit;
-}
-
 @media only screen and (max-width: 1280px) and (max-height: 800px) {
     /****** Generic Message Component ******/
     img#logo-msg {

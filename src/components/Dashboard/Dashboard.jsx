@@ -7,7 +7,7 @@ import DashboardCard from './DashboardCard'
 import Container from '@mui/material/Container'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllJobs, getStatus } from '../../actions/action'
-import { PieChart } from '@material-ui/icons'
+import BasicPie from './PieChart';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -42,7 +42,7 @@ const PieChartItem = styled(Paper)(({ theme }) => ({
 
 export default function DashboardGrid () {
   const { jobs, status } = useSelector(state => state)
-  useSelector(state => console.log(state))
+
   const dispatch = useDispatch()
   
   const filteredJobs = jobs.payload.filter(job => {
@@ -87,7 +87,7 @@ export default function DashboardGrid () {
           </Grid>
           <Grid item xs={12} id='pie-chart-grid'>
             <PieChartItem>
-              <PieChart />
+              <BasicPie />
             </PieChartItem>
           </Grid>
         </Grid>
