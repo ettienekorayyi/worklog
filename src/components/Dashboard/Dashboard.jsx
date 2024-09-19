@@ -87,7 +87,11 @@ export default function DashboardGrid () {
           </Grid>
           <Grid item xs={12} id='pie-chart-grid'>
             <PieChartItem>
-              <BasicPie />
+              <BasicPie 
+                  completed={2}
+                  pending={3}
+                  active={5}
+              />
             </PieChartItem>
           </Grid>
         </Grid>
