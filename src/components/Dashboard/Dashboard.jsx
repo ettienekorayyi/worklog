@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { styled } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
@@ -42,7 +42,6 @@ const PieChartItem = styled(Paper)(({ theme }) => ({
 
 export default function DashboardGrid () {
   const { jobs, status } = useSelector(state => state)
-  const [completed, setCompleted] = useState(0);
 
   const dispatch = useDispatch()
   

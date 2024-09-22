@@ -5,9 +5,9 @@ import { useTheme } from '@mui/material/styles'
 import AppBar from '@mui/material/AppBar'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
-import { TabPanel, a11yProps } from '../../../common/TabMenu/TabStyles';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useDispatch, useSelector } from 'react-redux';
+import { TabPanel, a11yProps } from '../../../common/TabMenu/TabStyles'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { useDispatch, useSelector } from 'react-redux'
 import { getAllJobs } from '../../../actions/action'
 import DataTable from './DataTable'
 import ControlledAccordions from './ControlledAccordions'
@@ -18,10 +18,18 @@ export const FullWidthTabs = ({ history, callback }) => {
   const theme = useTheme()
   const [value, setValue] = useState(0)
   const [searchInitiated, setSearchInitiated] = useState(false)
-  const { jobs, searchResult } = useSelector(state => state)
+  const { jobs, status, searchResult } = useSelector(state => state)
 
   const matches = useMediaQuery('(max-width:600px)')
   const dispatch = useDispatch()
+
+  const filteredJobs = jobs.payload.filter(job => {
+    const jobStatus = status.payload?.find(
+      jobStatus => jobStatus.id === job.statusId
+    )
+    job.status = jobStatus?.name
+    return { ...job, ...jobStatus }
+  }, {})
 
   useEffect(() => {
     dispatch(getAllJobs())
@@ -104,11 +112,7 @@ export const FullWidthTabs = ({ history, callback }) => {
       </TabPanel>
       <TabPanel value={value} index={2} dir={theme.direction}>
         {matches === false ? (
-          <DataTable
-            jobs={activeJobs}
-            title='All'
-            parentCallback={callback}
-          />
+          <DataTable jobs={activeJobs} title='All' parentCallback={callback} />
         ) : (
           <ControlledAccordions
             jobs={searchInitiated === true ? searchResult : activeJobs}
