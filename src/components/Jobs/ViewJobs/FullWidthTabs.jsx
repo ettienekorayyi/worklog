@@ -18,10 +18,18 @@ export const FullWidthTabs = ({ history, callback }) => {
   const theme = useTheme()
   const [value, setValue] = useState(0)
   const [searchInitiated, setSearchInitiated] = useState(false)
-  const { jobs, searchResult } = useSelector(state => state)
+  const { jobs, status, searchResult } = useSelector(state => state)
 
   const matches = useMediaQuery('(max-width:600px)')
   const dispatch = useDispatch()
+
+  const filteredJobs = jobs.payload.filter(job => {
+    const jobStatus = status.payload?.find(
+      jobStatus => jobStatus.id === job.statusId
+    )
+    job.status = jobStatus?.name
+    return { ...job, ...jobStatus }
+  }, {})
 
   useEffect(() => {
     dispatch(getAllJobs())
@@ -104,11 +112,7 @@ export const FullWidthTabs = ({ history, callback }) => {
       </TabPanel>
       <TabPanel value={value} index={2} dir={theme.direction}>
         {matches === false ? (
-          <DataTable
-            jobs={activeJobs}
-            title='All'
-            parentCallback={callback}
-          />
+          <DataTable jobs={activeJobs} title='All' parentCallback={callback} />
         ) : (
           <ControlledAccordions
             jobs={searchInitiated === true ? searchResult : activeJobs}

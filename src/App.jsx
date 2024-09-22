@@ -8,6 +8,7 @@ import CreateJob from "./components/Jobs/CreateJob/CreateJob";
 import JobDetails from "./components/Jobs/JobDetails/JobDetails";
 import JobDiary from "./components/Jobs/JobDiary/JobDiary";
 import GenericMessage from "./components/GenericMessage/GenericMessage";
+import Dashboard from "./components/Dashboard/Dashboard";
 import ViewJobs from "./components/Jobs/ViewJobs/ViewJobs";
 import InventoryList from "./components/inventory/InventoryList";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -41,6 +42,11 @@ function App () {
                         <Navigation />
 
                         {/* Inventory Routes */}
+                        <Route
+                            exact={true}
+                            path='/dashboard'
+                            component={Dashboard}
+                        />
                         <Route
                             exact={true}
                             path='/create/inventory'
