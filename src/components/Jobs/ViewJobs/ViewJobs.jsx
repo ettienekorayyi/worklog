@@ -26,7 +26,7 @@ export default function ViewJobs(props) {
                 })} />
             case 'jobDetails':
                 return <JobDetails 
-                    rows={params} 
+                    rows={params}
                     path={path} 
                     onClick={() => history.push({pathname: path,})} 
                 />

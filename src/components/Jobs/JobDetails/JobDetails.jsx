@@ -26,18 +26,18 @@ const useStyles = makeStyles(() => ({
   root: { height: '62rem' }
 }))
 
-const JobDetails = props => {
-  const { rows } = props // issues
+const JobDetails = ({ rows }) => {
   const classes = useStyles()
-  const jobs = rows === undefined ? {} : rows
+  const jobs = rows.row 
   const { job, status } = useSelector(state => state)
 
-  const [jobId, setJobId] = useState({})
-  //const [indicator, setIndicator] = useState(false)
-  const [jobName, setJobName] = useState({})
-  const [jobAddress, setJobAddress] = useState({})
-  const [description, setDescription] = useState({})//{} cause of the console issue. should be string?
-  const [notes, setNotes] = useState({}) // {}  cause of the console issue. should be string?
+  //{} cause of the console issue. should be string?
+  const [jobId, setJobId] = useState('')
+  const [jobName, setJobName] = useState('')
+  const [jobAddress, setJobAddress] = useState('')
+  const [description, setDescription] = useState('')
+  const [notes, setNotes] = useState('')
+  // {}  cause of the console issue. should be string?
 
   const [errors, setErrors] = useState({
     jobName: { helperText: '', fieldError: false },
@@ -56,9 +56,9 @@ const JobDetails = props => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (jobs?.row?.jobId !== undefined) {
+    if (jobs.jobId !== undefined) {
       dispatch(getStatus())
-      dispatch(getJob(jobs?.row?.jobId))
+      dispatch(getJob(jobs.jobId))
     }
 
     if (job.payload.jobId !== undefined) {
@@ -69,7 +69,10 @@ const JobDetails = props => {
       setDescription(job.payload.description)
       setNotes(job.payload.notes)
     }
-  }, [job?.loading, status.id])
+
+    return () => jobs.jobId = undefined;
+    
+  }, [job.loading])
 
   let jobObject = {
     jobId: jobId,
