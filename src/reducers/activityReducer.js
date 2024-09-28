@@ -43,7 +43,7 @@ function activityReducer(state = initialState, action) {
                 ...state,
                 loading: true
             };
-        case actions.ADD_ACTIVITY:
+        case actions.ADD_ACTIVITY_SUCCESS:
             return {
                 ...state,
                 payload: action.payload,
