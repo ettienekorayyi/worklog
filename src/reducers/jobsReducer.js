@@ -37,10 +37,16 @@ function jobsReducer(state = initialState, action) {
                 ...state,
                 loading: true
             };
-        case actions.GET_JOB:
+        case actions.GET_JOB_SUCCESS:
             return {
                 ...state,
                 payload: action.payload,
+                loading: false
+            };
+        case actions.GET_JOB_FAILED:
+            return {
+                ...state,
+                errorMessage: action.errorMessage,
                 loading: false
             };
         /*

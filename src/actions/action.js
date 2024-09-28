@@ -9,17 +9,15 @@ export const getJob = (id) => async dispatch => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: `Bearer ${token}` } };
 
-    try {
-        dispatch({ type: actions.GET_JOB_STARTED, loading: true });
+    
+    dispatch({ type: actions.GET_JOB_STARTED, loading: true });
 
-        let job = await taskstechApi.get(`/job/id?id=${id}`, config);
+    let job = await taskstechApi.get(`/job/id?id=${id}`, config);
 
-        if (job.data) {
-            dispatch({ type: actions.GET_JOB, payload: job.data, loading: false });
-        }
-    } catch (error) {
-        console.log(error.message)
-    }
+    if (job?.data)
+        dispatch({ type: actions.GET_JOB_SUCCESS, payload: job.data, loading: false });
+    else
+        dispatch({ type: actions.GET_JOB_FAILED, errorMessage: errorMessage, loading: false });
 }
 
 export const getAllJobs = () => async dispatch => {
@@ -88,7 +86,7 @@ export const updateJob = (job) => async dispatch => {
         }).catch((e) => {
             console.log(e.message)
         });
-        
+
     } catch (error) {
         console.log(error.message)
     }
@@ -103,7 +101,8 @@ export const getStatus = () => async dispatch => {
 
     dispatch({ type: actions.GET_JOB_STATUS_STARTED, loading: true });
 
-    if (data) dispatch({ type: actions.GET_JOB_STATUS, payload: data, loading: false });
+    if (data) dispatch({ type: actions.GET_JOB_STATUS_SUCCESS, payload: data, loading: false });
+    else dispatch({ type: actions.GET_JOB_STATUS_FAILED, errorMessage: 'failed', loading: false });
 }
 
 // Authentication Action
