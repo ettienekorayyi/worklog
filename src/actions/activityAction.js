@@ -97,13 +97,15 @@ export const updateActivity = (activity) => async dispatch => {
 
     const job = {
         "description": activity.description,
-        //"upload_photo": activity.image,
-        "job_id": activity.job_id
+        "createdOn": activity.createdOn,
+        "lastUpdated": activity.lastUpdated,
+        "lastUpdatedBy": activity.lastUpdatedBy,
+        "jobId": activity.jobId
     };
 
     try {
         taskstechApi
-            .put(`/activity/${activity.id}`, job, config)
+            .put(`/worklog/updateworklog/${activity.jobId}`, job, config)
             .then(res => {
                 dispatch({
                     type: actions.UPDATE_ACTIVITY_STARTED,
