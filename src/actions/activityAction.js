@@ -9,30 +9,30 @@ export const getActivities = (loading = true, id) => async dispatch => {
     const job = {
         "jobId": id
     };
-
-        taskstechApi.get(`/worklog/jobId?jobId=${job.jobId}`, config)
-            .then(res => {
+//973e4064-95df-48d0-c2ca-08dcca7e79c9
+    taskstechApi.get(`/worklog/jobId?jobId=${job.jobId}`, config)
+        .then(res => {
+            dispatch({
+                type: actions.GET_ACTIVITIES_STARTED,
+                loading: loading
+            });
+            if (res.data.length !== 0) {
                 dispatch({
-                    type: actions.GET_ACTIVITIES_STARTED,
-                    loading: loading
-                });
-                if (res.data.length !== 0) {
-                    dispatch({
-                        type: actions.GET_ACTIVITIES_COMPLETED,
-                        payload: res.data,
-                        hasError: false,
-                        loading: false
-                    });
-                }
-            }).catch((error) =>  {
-                dispatch({
-                    type: actions.GET_ACTIVITIES_ERROR,
-                    errorMessage: error.message,
-                    status:error.response.status,
-                    hasError: true,
+                    type: actions.GET_ACTIVITIES_COMPLETED,
+                    payload: res.data,
+                    hasError: false,
                     loading: false
                 });
+            }
+        }).catch((error) => {
+            dispatch({
+                type: actions.GET_ACTIVITIES_ERROR,
+                errorMessage: error.message,
+                status: error.response.status,
+                hasError: true,
+                loading: false
             });
+        });
 }
 
 export const getActivity = (loading = true) => async dispatch => {
@@ -62,21 +62,27 @@ export const getActivity = (loading = true) => async dispatch => {
 export const addActivity = (activity) => async dispatch => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: `Bearer ${token}` } };
-
+    
     const job = {
         "description": activity.description,
-        "upload_photo": activity.image,
-        "job_id": activity.jobId
+        "createdOn": activity.createdOn,
+        "lastUpdated": activity.lastUpdated,
+        "lastUpdatedBy": activity.lastUpdatedBy,
+        "jobId": activity.jobId
     };
 
     try {
-        taskstechApi.post(`/activity`, job, config)
+        taskstechApi.post(`/worklog/createworklog`, job, config)
             .then(res => {
                 dispatch({
                     type: actions.ADD_ACTIVITY_STARTED,
                     loading: true
                 });
                 if (res.data) {
+                    dispatch({
+                        type: actions.ADD_ACTIVITY_SUCCESS,
+                        loading: false
+                    });
                     dispatch(push('/view/jobs'));
                 }
             })

@@ -13,8 +13,13 @@ export default function FormDialog({ open, handleClose, handleReload, jobId }) {
   const dispatch = useDispatch();
   
   const handleSubmit = () => {
-    debugger;
-    const activity = { description, jobId };
+    let currentDate = new Date();
+    const formattedDate = `${currentDate.getFullYear()}/${currentDate.getMonth() + 1}/${currentDate.getDate()}`;
+    
+    const createdOn = formattedDate;
+    const lastUpdated = formattedDate;
+    const  lastUpdatedBy = 'Steve';
+    const activity = { description, jobId, createdOn, lastUpdated, lastUpdatedBy };
     dispatch(addActivity(activity));
     handleReload(true);
     handleClose();
