@@ -3,11 +3,12 @@ import { Container } from '@mui/material';
 import JobDiaryAccordions from './JobDiaryAccordions';
 import JobDiaryDetails from './JobDiaryDetails';
 import FormDialog from '../../../common/FormDialog';
-
+import { getActivities } from '../../../actions/activityAction';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function JobDiary(props) { 
   const { rows, history } = props;
-
+  const { activity } = useSelector(state => state);
   const [openActivityForm, setOpenActivityForm] = React.useState(false);
   const [openActivityDetailsForm, setOpenActivityDetailsForm] = React.useState(false);
   const [createdDate, setCreatedDate] = React.useState('');
@@ -15,12 +16,13 @@ export default function JobDiary(props) {
   const [activityId, setActivityId] = React.useState('');
   const [lastUpdatedDate, setLastUpdatedDate] = React.useState('');
   const [lastUpdatedBy, setLastUpdatedBy] = React.useState('');
-  const [jobId, setJobId] = React.useState('');
+  //const [jobId, setJobId] = React.useState('');
   const [reload, setReload] = React.useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if(rows !== undefined) { // history !== undefined
-      setJobId(rows.jobId);
+      dispatch(getActivities(true,rows.jobId));
     }
   },[])
   
@@ -66,7 +68,7 @@ export default function JobDiary(props) {
         {
             openActivityDetailsForm === true
             ? <JobDiaryDetails
-                jobId={jobId} 
+                jobId={activity?.payload[0]?.jobId} 
                 activityId={activityId}
                 description={description}
                 createdDate={createdDate}

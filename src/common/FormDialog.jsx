@@ -19,7 +19,7 @@ export default function FormDialog ({ open, handleClose, handleReload, jobId }) 
 
     const createdOn = formattedDate
     const lastUpdated = formattedDate
-    const lastUpdatedBy = 'Steve'
+    const lastUpdatedBy = 'Steve C'
     const activity = {
       description,
       jobId,

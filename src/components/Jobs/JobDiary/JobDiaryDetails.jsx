@@ -6,7 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { updateActivity } from '../../../actions/activityAction';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function JobDiaryDetails({ 
   open, handleClose,activityId,
@@ -17,13 +17,16 @@ export default function JobDiaryDetails({
   const dispatch = useDispatch();
 
   const activity = {
-    id: activityId, 
-    job_id: jobId,
-    description: desc
+    worklogId: activityId, 
+    description: desc,
+    jobId: jobId
   };
  
   const handleOnChange = ({ target }) => setDesc(target.value);
-  const handleUpdate = () => dispatch(updateActivity(activity));
+  const handleUpdate = () => {
+    dispatch(updateActivity(activity));
+    handleClose();
+  }
 
   return (
     <div>

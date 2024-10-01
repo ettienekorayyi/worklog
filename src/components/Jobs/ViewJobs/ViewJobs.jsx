@@ -7,11 +7,13 @@ export default function ViewJobs(props) {
     const { history } = props;
     const [type, setType] = useState('');
     const [params, setParams] = useState({});
+    const [jobId, setJobId] = useState('');
     const [path, setPath] = useState('');
 
     const callback = (props) => {
         setType(props.componentType);
-        setParams(props.rows)
+        setParams(props.rows);
+        setJobId(props.rows?.jobId);
         setPath(props.detailsPath);
     };
 
@@ -20,6 +22,7 @@ export default function ViewJobs(props) {
             case 'diary':
                 return <JobDiary 
                     rows={params} 
+                    jobId={jobId}
                     onClick={history.push({
                     pathname: "/view/jobs/diary",
                     state: { rows: params }
