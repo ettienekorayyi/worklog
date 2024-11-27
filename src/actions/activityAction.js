@@ -9,7 +9,6 @@ export const getActivities = (loading = true, id) => async dispatch => {
     const job = {
         "jobId": id
     };
-//973e4064-95df-48d0-c2ca-08dcca7e79c9
     taskstechApi.get(`/worklog/jobId?jobId=${job.jobId}`, config)
         .then(res => {
             dispatch({
@@ -18,7 +17,7 @@ export const getActivities = (loading = true, id) => async dispatch => {
             });
             if (res.data.length !== 0) {
                 dispatch({
-                    type: actions.GET_ACTIVITIES_COMPLETED,
+                    type: actions.GET_ACTIVITIES_SUCCESS,
                     payload: res.data,
                     hasError: false,
                     loading: false
@@ -26,7 +25,7 @@ export const getActivities = (loading = true, id) => async dispatch => {
             }
         }).catch((error) => {
             dispatch({
-                type: actions.GET_ACTIVITIES_ERROR,
+                type: actions.GET_ACTIVITIES_FAILED,
                 errorMessage: error.message,
                 status: error.response.status,
                 hasError: true,
@@ -66,8 +65,8 @@ export const addActivity = (activity) => async dispatch => {
     const job = {
         "description": activity.description,
         "createdOn": activity.createdOn,
-        "lastUpdated": activity.lastUpdated,
-        "lastUpdatedBy": activity.lastUpdatedBy,
+        "lastUpdated": activity.lastUpdated, //
+        "lastUpdatedBy": activity.lastUpdatedBy, //
         "jobId": activity.jobId
     };
 
@@ -96,14 +95,17 @@ export const updateActivity = (activity) => async dispatch => {
     const config = { headers: { Authorization: `Bearer ${token}` } };
 
     const job = {
+        "worklogId": activity.worklogId,
         "description": activity.description,
-        //"upload_photo": activity.image,
-        "job_id": activity.job_id
+        "createdOn": activity.createdOn,
+        "lastUpdated": activity.lastUpdated,
+        "lastUpdatedBy": activity.lastUpdatedBy,
+        "jobId": activity.jobId
     };
 
     try {
         taskstechApi
-            .put(`/activity/${activity.id}`, job, config)
+            .put(`/worklog/updateworklog/`, job, config)
             .then(res => {
                 dispatch({
                     type: actions.UPDATE_ACTIVITY_STARTED,

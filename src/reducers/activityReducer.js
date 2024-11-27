@@ -12,14 +12,14 @@ function activityReducer(state = initialState, action) {
                 ...state,
                 loading: true
             };
-        case actions.GET_ACTIVITIES_COMPLETED:
+        case actions.GET_ACTIVITIES_SUCCESS:
             return {
                 ...state,
                 payload: action.payload,
                 hasError: action.hasError,
                 loading: false
             };
-        case actions.GET_ACTIVITIES_ERROR: 
+        case actions.GET_ACTIVITIES_FAILED:
             return {
                 ...state,
                 status: action.status,
@@ -32,10 +32,16 @@ function activityReducer(state = initialState, action) {
                 ...state,
                 loading: true
             };
-        case actions.GET_ACTIVITY:
+        case actions.GET_ACTIVITY_SUCCESS:
             return {
                 ...state,
                 payload: action.payload,
+                loading: false
+            };
+        case actions.GET_ACTIVITY_FAILED:
+            return {
+                ...state,
+                errorMessage: action.errorMessage,
                 loading: false
             };
         case actions.ADD_ACTIVITY_STARTED:
@@ -49,15 +55,26 @@ function activityReducer(state = initialState, action) {
                 payload: action.payload,
                 loading: false
             };
+        case actions.ADD_ACTIVITY_FAILED:
+            return {
+                ...state,
+                errorMessage: action.errorMessage,
+                loading: false
+            };
         case actions.UPDATE_ACTIVITY_STARTED:
             return {
                 ...state,
                 loading: true
             };
-        case actions.UPDATE_ACTIVITY:
+        case actions.UPDATE_ACTIVITY_SUCCESS:
             return {
                 ...state,
-                payload: action.payload,
+                loading: false
+            };
+        case actions.UPDATE_ACTIVITY_FAILED:
+            return {
+                ...state,
+                errorMessage: action.errorMessage,
                 loading: false
             };
         default:
