@@ -9,7 +9,7 @@ export const getJob = (id) => async dispatch => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: `Bearer ${token}` } };
 
-    
+
     dispatch({ type: actions.GET_JOB_STARTED, loading: true });
 
     let job = await taskstechApi.get(`/job/id?id=${id}`, config);
@@ -228,15 +228,17 @@ export const signUp = (firstname, lastname, email, password, confirmPassword, de
             phone: phone
         }
         console.log(traderSignUpData)
-        taskstechApi.post('users/tradesperson', traderSignUpData)
-            .then((res) => {
-                console.log(res)
-                alert("Your account has been successfully created. \n\nWelcome!")
-                dispatch(push('/login'))
-            }).catch((error) => {
-                console.log(error.response)
-                alert(error.response.data.message)
-            })
+        try {
+            taskstechApi.post(`user/register`, traderSignUpData)
+                .then(res => {
+                    console.log(res)
+                    alert("Your account has been successfully created. \n\nWelcome!")
+                    dispatch(push('/login'))
+                })
+        } catch (error) {
+            console.log(error.message)
+            alert(error.response.data.message)
+        }
     }
 }
 
