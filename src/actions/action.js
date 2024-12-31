@@ -229,7 +229,7 @@ export const signUp = (firstname, lastname, email, password, confirmPassword, de
         }
         console.log(traderSignUpData)
         try {
-            taskstechApi.post(`user/register`, traderSignUpData)
+            taskstechApi.post(`/user/register`, traderSignUpData)
                 .then(res => {
                     console.log(res)
                     alert("Your account has been successfully created. \n\nWelcome!")
@@ -257,7 +257,7 @@ export const signIn = (email, password) => {
     };
 
     return async (dispatch) => {
-        taskstechApi.post(`user/signIn`, postData, headers)
+        taskstechApi.post(`/user/signin`, postData, headers)
             .then(res => {
                 localStorage.setItem("id", res.data.id)
                 localStorage.setItem("token", res.data.token)
@@ -269,6 +269,7 @@ export const signIn = (email, password) => {
                 getTraderData()
                 dispatch(push('/view/jobs'))
             }).catch((error) => {
+                console.log(error)
                 alert("Email and Password does not match. \n\nPlease try again.")
             })
     }
