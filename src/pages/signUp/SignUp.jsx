@@ -19,13 +19,14 @@ export default function TradieSignUp () {
     );
     const [hasError, setHasError] = useState(false);
     const [errorText, setErrorText] = useState("");
-    const [firstname, setFirstname] = useState("");
-    const [lastname, setLastname] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [userName, setUserName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [description, setDescription] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    //const [confirmPassword, setConfirmPassword] = useState("");
 
     useEffect(() => {
         setHasError(false);
@@ -33,16 +34,16 @@ export default function TradieSignUp () {
 
     const inputFirstname = useCallback(
         event => {
-            setFirstname(event.target.value);
+            setFirstName(event.target.value);
         },
-        [setFirstname]
+        [setFirstName]
     );
 
     const inputLastname = useCallback(
         event => {
-            setLastname(event.target.value);
+            setLastName(event.target.value);
         },
-        [setLastname]
+        [setLastName]
     );
 
     const inputPhone = useCallback(
@@ -50,6 +51,13 @@ export default function TradieSignUp () {
             setPhone(event.target.value);
         },
         [setPhone]
+    );
+
+    const inputUserName = useCallback(
+        event => {
+            setUserName(event.target.value);
+        },
+        [setUserName]
     );
 
     const validateEmail = () => {
@@ -79,12 +87,14 @@ export default function TradieSignUp () {
         [setPassword]
     );
 
+    /*
     const inputConfirmPassword = useCallback(
         event => {
             setConfirmPassword(event.target.value);
         },
         [setConfirmPassword]
     );
+    */
 
     const inputDescription = useCallback(
         event => {
@@ -95,26 +105,30 @@ export default function TradieSignUp () {
 
     const handleSubmit = () => {
         if (
-            firstname === "" ||
-            lastname === "" ||
+            firstName === "" ||
+            lastName === "" ||
             email === "" ||
             password === "" ||
-            confirmPassword === ""
+            userName === ""
+            //confirmPassword === ""
         ) {
             alert("Please fill in the form.");
             return false;
         }
+        /*
         if (password !== confirmPassword) {
             alert("Your password and confirm password do not match.");
             return false;
-        }
+        }*/ 
+        debugger;
         dispatch(
             signUp(
-                firstname,
-                lastname,
+                firstName,
+                lastName,
                 email,
                 password,
-                confirmPassword,
+                //confirmPassword,
+                userName,
                 description,
                 phone
             )
@@ -122,13 +136,13 @@ export default function TradieSignUp () {
     };
 
     const handleClear = () => {
-        setFirstname("");
-        setLastname("");
+        setFirstName("");
+        setLastName("");
         setEmail("");
         setPhone("");
         setDescription("");
         setPassword("");
-        setConfirmPassword("");
+        setUserName("");
         setHasError(false);
     };
 
@@ -172,7 +186,7 @@ export default function TradieSignUp () {
                                     id='firstName'
                                     label='First Name*'
                                     autoFocus
-                                    value={firstname}
+                                    value={firstName}
                                     onChange={inputFirstname}
                                 />
                             </Grid>
@@ -184,7 +198,7 @@ export default function TradieSignUp () {
                                     label='Last Name*'
                                     name='lastName'
                                     autoComplete='name'
-                                    value={lastname}
+                                    value={lastName}
                                     onChange={inputLastname}
                                 />
                             </Grid>
@@ -198,6 +212,18 @@ export default function TradieSignUp () {
                                     autoComplete='tel'
                                     value={phone}
                                     onChange={inputPhone}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    variant='outlined'
+                                    fullWidth
+                                    id='userName'
+                                    label='Username*'
+                                    name='userName'
+                                    autoComplete='userName'
+                                    value={userName}
+                                    onChange={inputUserName}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -242,6 +268,7 @@ export default function TradieSignUp () {
                                     onChange={inputPassword}
                                 />
                             </Grid>
+                            {/*
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     type='password'
@@ -256,6 +283,7 @@ export default function TradieSignUp () {
                                     onKeyPress={event => onKeyEnter(event)}
                                 />
                             </Grid>
+                            */}
                         </Grid>
                         <Grid
                             container
