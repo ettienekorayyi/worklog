@@ -217,15 +217,16 @@ export const deleteInventory = (iid) => {
 
 // Traders Actions
 
-export const signUp = (firstname, lastname, email, password, confirmPassword, description, phone) => {
+export const signUp = (firstName, lastName, email, password, userName, description, phoneNumber) => {
     return async (dispatch) => {
         const traderSignUpData = {
             email: email,
             password: password,
-            first_name: firstname,
-            last_name: lastname,
+            firstName: firstName,
+            lastName: lastName,
             description: description,
-            phone: phone
+            userName: userName, 
+            phoneNumber: phoneNumber
         }
         console.log(traderSignUpData)
         try {
