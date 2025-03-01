@@ -225,12 +225,17 @@ export const signUp = (firstName, lastName, email, password, userName, descripti
             firstName: firstName,
             lastName: lastName,
             description: description,
-            userName: userName, 
+            userName: userName,
             phoneNumber: phoneNumber
         }
         console.log(traderSignUpData)
         try {
-            taskstechApi.post(`/user/register`, traderSignUpData)
+            taskstechApi.post(`/user/register`, traderSignUpData, {
+                withCredentials: true,  // Ensure credentials are sent (if needed)
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
                 .then(res => {
                     console.log(res)
                     alert("Your account has been successfully created. \n\nWelcome!")

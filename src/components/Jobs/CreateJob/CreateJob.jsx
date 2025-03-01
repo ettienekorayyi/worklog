@@ -50,7 +50,6 @@ const CreateJob = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    //debugger
     dispatch(getStatus())
     //dispatch(getCustomers())
   }, [indicator])
@@ -154,8 +153,7 @@ const CreateJob = () => {
   const handleDropdownChange = (event, params) => {
     const { name, selectedIndex, childNodes, value } = event.target
     let { helperText, fieldError } = fieldValidator(value, name) //
-    debugger;
-    console.log(name)
+    
     switch (name) {
       case 'job_status_id': {
         const index = selectedIndex
