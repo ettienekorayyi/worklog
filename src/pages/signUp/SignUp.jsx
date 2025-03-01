@@ -115,12 +115,8 @@ export default function TradieSignUp () {
             alert("Please fill in the form.");
             return false;
         }
-        /*
-        if (password !== confirmPassword) {
-            alert("Your password and confirm password do not match.");
-            return false;
-        }*/ 
-        debugger;
+        
+       
         dispatch(
             signUp(
                 firstName,
